@@ -30,10 +30,10 @@ npm install github:Mr-Skribbls/React-MUI-Base-Components#semver:^0.1.0
 You must install the library's peer dependencies yourself (they are not bundled):
 
 ```bash
-npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/x-data-grid dayjs
+npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/x-data-grid dayjs immer
 ```
 
-`lodash` is a regular runtime dependency and is installed automatically.
+`lodash` and `react-icons` are regular runtime dependencies and are installed automatically. `dayjs` and `immer` are peer dependencies — install them yourself (both are included in the command above).
 
 ## Usage
 
@@ -243,7 +243,7 @@ function App() {
 
 ### `useImducer`
 
-`useImducer` is a `useReducer`-based state hook that accepts Immer-flavored actions. It returns the same `[state, dispatch]` API as `useReducer`.
+`useImducer` is a `useReducer`-based state hook that accepts Immer-flavored actions. It returns the same `[state, dispatch]` API as `useReducer`. It relies on your project's own `immer` installation (a peer dependency), so the `draft` types in `DRAFT` actions are shared with your app rather than coming from a separate bundled copy.
 
 | Action       | Shape                                        | Behavior                                             |
 | ------------ | ------------------------------------------- | ---------------------------------------------------- |
