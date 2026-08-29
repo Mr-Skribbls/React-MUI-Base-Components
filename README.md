@@ -6,7 +6,7 @@ The package is hosted and distributed directly from GitHub — no separate npm p
 
 ## What's included
 
-- Modular, typed React components built on `@mui/material` (e.g. `ButtonSelect`).
+- Modular, typed React components built on `@mui/material` (e.g. `ButtonSelect`, `ActiveAddress`).
 - A shared MUI theme (`lightTheme`/`darkTheme`) as a foundation for consistent theming.
 - A Storybook environment for developing and documenting components in isolation, with light/dark theme switching.
 - Strict TypeScript with `@/*` path aliases and generated type declarations.
@@ -84,6 +84,15 @@ function Root() {
 | Component      | Description                                                                                    |
 | -------------- | ---------------------------------------------------------------------------------------------- |
 | `ButtonSelect` | MUI `ToggleButtonGroup`-based single-select rendering a set of options, with typed value/display key support. |
+| `ActiveAddress`| Renders an address with a map button that deep-links to the Google Maps app and falls back to the web in a browser. |
+
+### `ActiveAddress` props
+
+| Prop      | Type     | Description                                                            |
+| --------- | -------- | ---------------------------------------------------------------------- |
+| `address` | `string` | The address to display and open in Google Maps.                        |
+
+Clicking the map button attempts to open the native Google Maps app (`comgooglemaps://`) and, if the app isn't available, falls back to opening the Google Maps web search in a new tab after 500ms.
 
 ### `ButtonSelect` props
 
