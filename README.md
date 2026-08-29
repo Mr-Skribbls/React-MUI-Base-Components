@@ -90,6 +90,7 @@ function Root() {
 | `GridList`     | MUI X `DataGrid`-based list built from plain data rows with declarative column/selection configuration. |
 | `AddableGridList` | `GridList` wrapped in a fill-height layout with an add-item dialog slot.                         |
 | `ColorPickerButton` | A color swatch button that opens a picker dialog and reports changes.                              |
+| `Overlay`           | A transparent, full-screen layer that centers its content over the page.                        |
 
 ### `ActiveAddress` props
 
@@ -224,6 +225,27 @@ function App() {
       onChange={(color) => console.log(color.toHexString())}
       configuration={{ size: 40 }}
     />
+  );
+}
+```
+
+### `Overlay` props
+
+| Prop         | Type         | Description                                                    |
+| ------------ | ------------ | -------------------------------------------------------------- |
+| `children?`  | `ReactNode`  | Content centered over the full viewport.                       |
+| `className?` | `string`     | Extra class name applied to the overlay root element.          |
+
+`Overlay` is a transparent `position: fixed` layer that covers the viewport and flex-centers its children, making it a base for implementing modal/dialog backdrops. It ships a CSS module, so consumers should import the emitted stylesheet once (same import as the `AddableGridList` note above).
+
+```tsx
+import { Overlay } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <Overlay>
+      <p>This is centered over the page.</p>
+    </Overlay>
   );
 }
 ```
