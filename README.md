@@ -138,6 +138,34 @@ npm run typecheck
 3. Add a co-located `<Name>.stories.tsx` for Storybook.
 4. Re-export it from `src/index.ts`.
 
+## Publishing / Releasing
+
+Because this package is installed directly from GitHub (there is no npm publish step), the compiled `dist/` output is **committed to the repository**. npm serves whatever lives in the git repo, so `dist/` must be rebuilt and committed on every release for consumers to receive the current code.
+
+Release workflow:
+
+```bash
+# 1. Rebuild the latest bundle + type declarations
+npm run build
+
+# 2. Commit the source changes together with the fresh dist/
+git add -A
+git commit -m "..."
+
+# 3. Tag the release and push everything
+git tag v0.1.0
+git push
+git push --tags
+```
+
+Consumers then install it (optionally pinned to the tag):
+
+```bash
+npm install github:Mr-Skribbls/React-MUI-Base-Components
+npm install github:Mr-Skribbls/React-MUI-Base-Components#v0.1.0
+npm install github:Mr-Skribbls/React-MUI-Base-Components#semver:^0.1.0
+```
+
 ## License
 
 [Apache-2.0](./LICENSE)
