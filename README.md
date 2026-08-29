@@ -6,7 +6,7 @@ The package is hosted and distributed directly from GitHub — no separate npm p
 
 ## What's included
 
-- Modular, typed React components built on `@mui/material` (e.g. `BaseButton`).
+- Modular, typed React components built on `@mui/material` (e.g. `ButtonSelect`).
 - A shared MUI theme (`lightTheme`/`darkTheme`) as a foundation for consistent theming.
 - A Storybook environment for developing and documenting components in isolation, with light/dark theme switching.
 - Strict TypeScript with `@/*` path aliases and generated type declarations.
@@ -33,16 +33,31 @@ You must install the library's peer dependencies yourself (they are not bundled)
 npm install react react-dom @mui/material @emotion/react @emotion/styled
 ```
 
+`lodash` is a regular runtime dependency and is installed automatically.
+
 ## Usage
 
 ```tsx
-import { BaseButton } from '@mr-skribbls/react-mui-base-components';
+import { useState } from 'react';
+import { ButtonSelect } from '@mr-skribbls/react-mui-base-components';
+
+const priorities = [
+  { id: 1, name: 'Low' },
+  { id: 2, name: 'Medium' },
+  { id: 3, name: 'High' },
+];
 
 function App() {
+  const [priority, setPriority] = useState<number>(1);
+
   return (
-    <BaseButton variant="contained" color="primary">
-      Hello world
-    </BaseButton>
+    <ButtonSelect<typeof priorities[number], number, string>
+      options={priorities}
+      valueProp="id"
+      displayProp="name"
+      selectedOption={priorities.find((p) => p.id === priority)}
+      onChange={(id) => setPriority(id as number)}
+    />
   );
 }
 ```
@@ -66,11 +81,23 @@ function Root() {
 
 ## Components
 
-| Component    | Description                                                             |
-| ------------ | ----------------------------------------------------------------------- |
-| `BaseButton` | MUI `Button` wrapper with sensible defaults and the full MUI props API. |
+| Component      | Description                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| `ButtonSelect` | MUI `ToggleButtonGroup`-based single-select rendering a set of options, with typed value/display key support. |
 
-_More components coming soon._
+### `ButtonSelect` props
+
+| Prop             | Type                            | Description                                                            |
+| ---------------- | ------------------------------- | ---------------------------------------------------------------------- |
+| `options`        | `T[]`                           | The list of options to render as toggle buttons.                       |
+| `onChange`       | `(selectedValue?: V) => void`   | Called with the selected value when a button is pressed.               |
+| `label?`         | `string`                        | Accessible label used for the group's `aria-label`.                    |
+| `selectedOption` | `T`                             | The currently selected option.                                         |
+| `disabled?`      | `boolean`                       | Disables all option buttons.                                           |
+| `valueProp?`     | `SpecificTypeKeys<T, V>`        | The key of `T` whose value is used as the toggle value. Omit for primitives. |
+| `displayProp?`   | `SpecificTypeKeys<T, D>`        | The key of `T` whose value is displayed. Omit to display the option directly. |
+
+Where `V` and `D` are `number | string`, and options may be primitives (e.g. `string[]`) or objects (using `valueProp`/`displayProp`).
 
 ## Development
 
@@ -96,7 +123,7 @@ The Storybook is configured with **light/dark theme switching** via `@storybook/
 npm run build      # typecheck + build ESM bundle and type declarations to dist/
 ```
 
-Output lands in `dist/` (ESM `index.js` + `*.d.ts`). The bundle externalizes `react`, `react-dom`, and all `@mui/*`/`@emotion/*` packages.
+Output lands in `dist/` (ESM `index.js` + `*.d.ts`). The bundle externalizes `react`, `react-dom`, all `@mui/*`/`@emotion/*` packages, and `lodash`.
 
 ### Type-checking
 
