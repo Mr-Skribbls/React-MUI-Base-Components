@@ -85,6 +85,7 @@ function Root() {
 | -------------- | ---------------------------------------------------------------------------------------------- |
 | `ButtonSelect` | MUI `ToggleButtonGroup`-based single-select rendering a set of options, with typed value/display key support. |
 | `ActiveAddress`| Renders an address with a map button that deep-links to the Google Maps app and falls back to the web in a browser. |
+| `ActivePhone`  | Renders a phone number with call and message buttons that are shown on mobile devices only.    |
 
 ### `ActiveAddress` props
 
@@ -93,6 +94,14 @@ function Root() {
 | `address` | `string` | The address to display and open in Google Maps.                        |
 
 Clicking the map button attempts to open the native Google Maps app (`comgooglemaps://`) and, if the app isn't available, falls back to opening the Google Maps web search in a new tab after 500ms.
+
+### `ActivePhone` props
+
+| Prop    | Type     | Description                                                    |
+| ------- | -------- | -------------------------------------------------------------- |
+| `phone` | `string` | The phone number to display and use for the call/message links. |
+
+The call (`tel:` link) and message (`sms:` link) buttons are rendered only on mobile devices, detected via the `useDevice` hook.
 
 ### `ButtonSelect` props
 
