@@ -89,6 +89,7 @@ function Root() {
 | `ActiveEmail`  | Renders an email address with a button that opens a `mailto:` link in a new tab.               |
 | `GridList`     | MUI X `DataGrid`-based list built from plain data rows with declarative column/selection configuration. |
 | `AddableGridList` | `GridList` wrapped in a fill-height layout with an add-item dialog slot.                         |
+| `ColorPickerButton` | A color swatch button that opens a picker dialog and reports changes.                              |
 
 ### `ActiveAddress` props
 
@@ -192,6 +193,36 @@ function App() {
       data={pets}
       addItemDialog={<AddPetDialog />}
       configuration={{ columns: { headers: { name: 'Name' } } }}
+    />
+  );
+}
+```
+
+### `ColorPickerButton` props
+
+| Prop             | Type                  | Description                                                                |
+| ---------------- | --------------------- | -------------------------------------------------------------------------- |
+| `color`          | `Color`               | The initial color shown by the swatch.                                     |
+| `onChange`       | `(color: Color) => void` | Called with the new `Color` as the picker changes.                        |
+| `configuration?` | object                | Swatch styling and dialog behavior (see below).                            |
+
+| `configuration` key | Type      | Default | Description                                        |
+| ------------------- | --------- | ------- | -------------------------------------------------- |
+| `size`              | `number`  | `35`    | Swatch button width/height in pixels.               |
+| `padding`           | `number`  | `5`     | Inner padding in pixels.                            |
+| `borderRadius`      | `number`  | `5`     | Corner radius in pixels.                            |
+| `allowDialog`       | `boolean` | `true`  | When `false`, clicking does not open the picker dialog. |
+
+`Color` is re-exported (from `@rc-component/color-picker`) as a type for typing `color`/`onChange`. The swatch border comes from the library stylesheet — consumers should import it once as shown in the `AddableGridList` note above. The picker's own styles (palette, sliders, alpha checkerboard) are bundled into that same stylesheet, so a single import covers both. Because `@rc-component/color-picker` is a runtime dependency, consumers get it automatically when installing the package.
+
+```tsx
+import { ColorPickerButton } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <ColorPickerButton
+      onChange={(color) => console.log(color.toHexString())}
+      configuration={{ size: 40 }}
     />
   );
 }

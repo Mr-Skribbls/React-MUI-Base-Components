@@ -1,198 +1,199 @@
-import { createTheme as _ } from "@mui/material/styles";
-import b, { useCallback as k, useMemo as x, useReducer as R } from "react";
-import { produce as T } from "immer";
-import w, { forEach as G, isNil as a, sortBy as F, uniq as N, flatten as V, keys as D, findIndex as W, isEmpty as $, isFunction as E, isString as B, isNumber as q, isBoolean as U, isSymbol as K, cloneDeep as g } from "lodash";
-import { jsx as o, jsxs as P, Fragment as J } from "react/jsx-runtime";
-import { ToggleButtonGroup as Q, ToggleButton as X, Stack as f, IconButton as C } from "@mui/material";
-import { DataGrid as Y } from "@mui/x-data-grid";
-const fe = ({
+import { createTheme as T } from "@mui/material/styles";
+import v, { useCallback as B, useMemo as P, useReducer as N } from "react";
+import { produce as V } from "immer";
+import x, { forEach as f, isNil as i, sortBy as F, uniq as W, flatten as q, keys as H, findIndex as U, isEmpty as K, isFunction as j, isString as L, isNumber as J, isBoolean as Q, isSymbol as X, cloneDeep as Y } from "lodash";
+import { jsx as n, jsxs as y, Fragment as I } from "react/jsx-runtime";
+import { ToggleButtonGroup as Z, ToggleButton as g, Stack as E, IconButton as S, Dialog as ee, DialogContent as te, DialogActions as le, Button as se } from "@mui/material";
+import { DataGrid as re } from "@mui/x-data-grid";
+import ne, { Color as ce } from "@rc-component/color-picker";
+const Ie = ({
   options: t,
   onChange: e,
-  label: r,
-  selectedOption: l,
-  disabled: i,
-  displayProp: d,
+  label: l,
+  selectedOption: s,
+  disabled: o,
+  displayProp: a,
   valueProp: u
 }) => {
-  const m = k(
-    (s) => {
-      if (!w.isNil(s))
-        return w.isNil(u) ? s : s[u];
+  const m = B(
+    (r) => {
+      if (!x.isNil(r))
+        return x.isNil(u) ? r : r[u];
     },
     [u]
-  ), n = k(
-    (s) => w.isNil(d) ? s : s[d],
-    [d]
-  ), j = x(() => m(l), [m, l]);
-  return /* @__PURE__ */ o(
-    Q,
+  ), c = B(
+    (r) => x.isNil(a) ? r : r[a],
+    [a]
+  ), C = P(() => m(s), [m, s]);
+  return /* @__PURE__ */ n(
+    Z,
     {
       color: "primary",
-      value: j,
+      value: C,
       exclusive: !0,
-      onChange: (s, p) => {
+      onChange: (r, p) => {
         e(p);
       },
-      "aria-label": r ?? "Select an option",
-      children: w.chain(t).map((s) => {
-        const p = m(s), h = n(s);
-        return { option: s, value: p, display: h };
-      }).filter((s) => !w.isNil(s.value)).value().map(({ value: s, display: p }) => /* @__PURE__ */ o(
-        X,
+      "aria-label": l ?? "Select an option",
+      children: x.chain(t).map((r) => {
+        const p = m(r), h = c(r);
+        return { option: r, value: p, display: h };
+      }).filter((r) => !x.isNil(r.value)).value().map(({ value: r, display: p }) => /* @__PURE__ */ n(
+        g,
         {
-          value: s,
-          disabled: i,
+          value: r,
+          disabled: o,
           children: p
         },
-        s
+        r
       ))
     }
   );
 };
-var L = {
+var $ = {
   color: void 0,
   size: void 0,
   className: void 0,
   style: void 0,
   attr: void 0
-}, A = b.createContext && /* @__PURE__ */ b.createContext(L), Z = ["attr", "size", "title"];
-function ee(t, e) {
+}, A = v.createContext && /* @__PURE__ */ v.createContext($), de = ["attr", "size", "title"];
+function oe(t, e) {
   if (t == null) return {};
-  var r, l, i = te(t, e);
+  var l, s, o = ae(t, e);
   if (Object.getOwnPropertySymbols) {
-    var d = Object.getOwnPropertySymbols(t);
-    for (l = 0; l < d.length; l++) r = d[l], e.indexOf(r) === -1 && {}.propertyIsEnumerable.call(t, r) && (i[r] = t[r]);
+    var a = Object.getOwnPropertySymbols(t);
+    for (s = 0; s < a.length; s++) l = a[s], e.indexOf(l) === -1 && {}.propertyIsEnumerable.call(t, l) && (o[l] = t[l]);
   }
-  return i;
+  return o;
 }
-function te(t, e) {
+function ae(t, e) {
   if (t == null) return {};
-  var r = {};
-  for (var l in t) if ({}.hasOwnProperty.call(t, l)) {
-    if (e.indexOf(l) !== -1) continue;
-    r[l] = t[l];
+  var l = {};
+  for (var s in t) if ({}.hasOwnProperty.call(t, s)) {
+    if (e.indexOf(s) !== -1) continue;
+    l[s] = t[s];
   }
-  return r;
+  return l;
 }
-function O() {
-  return O = Object.assign ? Object.assign.bind() : function(t) {
+function M() {
+  return M = Object.assign ? Object.assign.bind() : function(t) {
     for (var e = 1; e < arguments.length; e++) {
-      var r = arguments[e];
-      for (var l in r) ({}).hasOwnProperty.call(r, l) && (t[l] = r[l]);
+      var l = arguments[e];
+      for (var s in l) ({}).hasOwnProperty.call(l, s) && (t[s] = l[s]);
     }
     return t;
-  }, O.apply(null, arguments);
+  }, M.apply(null, arguments);
 }
-function H(t, e) {
-  var r = Object.keys(t);
+function _(t, e) {
+  var l = Object.keys(t);
   if (Object.getOwnPropertySymbols) {
-    var l = Object.getOwnPropertySymbols(t);
-    e && (l = l.filter(function(i) {
-      return Object.getOwnPropertyDescriptor(t, i).enumerable;
-    })), r.push.apply(r, l);
+    var s = Object.getOwnPropertySymbols(t);
+    e && (s = s.filter(function(o) {
+      return Object.getOwnPropertyDescriptor(t, o).enumerable;
+    })), l.push.apply(l, s);
   }
-  return r;
+  return l;
 }
-function M(t) {
+function z(t) {
   for (var e = 1; e < arguments.length; e++) {
-    var r = arguments[e] != null ? arguments[e] : {};
-    e % 2 ? H(Object(r), !0).forEach(function(l) {
-      re(t, l, r[l]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(r)) : H(Object(r)).forEach(function(l) {
-      Object.defineProperty(t, l, Object.getOwnPropertyDescriptor(r, l));
+    var l = arguments[e] != null ? arguments[e] : {};
+    e % 2 ? _(Object(l), !0).forEach(function(s) {
+      ie(t, s, l[s]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(l)) : _(Object(l)).forEach(function(s) {
+      Object.defineProperty(t, s, Object.getOwnPropertyDescriptor(l, s));
     });
   }
   return t;
 }
-function re(t, e, r) {
-  return (e = le(e)) in t ? Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }) : t[e] = r, t;
+function ie(t, e, l) {
+  return (e = me(e)) in t ? Object.defineProperty(t, e, { value: l, enumerable: !0, configurable: !0, writable: !0 }) : t[e] = l, t;
 }
-function le(t) {
-  var e = se(t, "string");
+function me(t) {
+  var e = he(t, "string");
   return typeof e == "symbol" ? e : e + "";
 }
-function se(t, e) {
+function he(t, e) {
   if (typeof t != "object" || !t) return t;
-  var r = t[Symbol.toPrimitive];
-  if (r !== void 0) {
-    var l = r.call(t, e);
-    if (typeof l != "object") return l;
+  var l = t[Symbol.toPrimitive];
+  if (l !== void 0) {
+    var s = l.call(t, e);
+    if (typeof s != "object") return s;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return (e === "string" ? String : Number)(t);
 }
-function I(t) {
-  return t && t.map((e, r) => /* @__PURE__ */ b.createElement(e.tag, M({
-    key: r
-  }, e.attr), I(e.child)));
+function G(t) {
+  return t && t.map((e, l) => /* @__PURE__ */ v.createElement(e.tag, z({
+    key: l
+  }, e.attr), G(e.child)));
 }
-function S(t) {
-  return (e) => /* @__PURE__ */ b.createElement(ne, O({
-    attr: M({}, t.attr)
-  }, e), I(t.child));
+function k(t) {
+  return (e) => /* @__PURE__ */ v.createElement(ue, M({
+    attr: z({}, t.attr)
+  }, e), G(t.child));
 }
-function ne(t) {
-  var e = (r) => {
-    var l = t.attr, i = t.size, d = t.title, u = ee(t, Z), m = i || r.size || "1em", n;
-    return r.className && (n = r.className), t.className && (n = (n ? n + " " : "") + t.className), /* @__PURE__ */ b.createElement("svg", O({
+function ue(t) {
+  var e = (l) => {
+    var s = t.attr, o = t.size, a = t.title, u = oe(t, de), m = o || l.size || "1em", c;
+    return l.className && (c = l.className), t.className && (c = (c ? c + " " : "") + t.className), /* @__PURE__ */ v.createElement("svg", M({
       stroke: "currentColor",
       fill: "currentColor",
       strokeWidth: "0"
-    }, r.attr, l, u, {
-      className: n,
-      style: M(M({
-        color: t.color || r.color
-      }, r.style), t.style),
+    }, l.attr, s, u, {
+      className: c,
+      style: z(z({
+        color: t.color || l.color
+      }, l.style), t.style),
       height: m,
       width: m,
       xmlns: "http://www.w3.org/2000/svg"
-    }), d && /* @__PURE__ */ b.createElement("title", null, d), t.children);
+    }), a && /* @__PURE__ */ v.createElement("title", null, a), t.children);
   };
-  return A !== void 0 ? /* @__PURE__ */ b.createElement(A.Consumer, null, (r) => e(r)) : e(L);
+  return A !== void 0 ? /* @__PURE__ */ v.createElement(A.Consumer, null, (l) => e(l)) : e($);
 }
-function ce(t) {
-  return S({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "m20.5 3-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M10 5.47l4 1.4v11.66l-4-1.4zm-5 .99 3-1.01v11.7l-3 1.16zm14 11.08-3 1.01V6.86l3-1.16z" }, child: [] }] })(t);
+function pe(t) {
+  return k({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "m20.5 3-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M10 5.47l4 1.4v11.66l-4-1.4zm-5 .99 3-1.01v11.7l-3 1.16zm14 11.08-3 1.01V6.86l3-1.16z" }, child: [] }] })(t);
 }
-function de(t) {
-  return S({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79zm9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75zM7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57a.8.8 0 0 0-.31-.05c-.26 0-.51.1-.71.29l-2.2 2.2a15.15 15.15 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02A11.4 11.4 0 0 1 8.5 4c0-.55-.45-1-1-1" }, child: [] }] })(t);
+function be(t) {
+  return k({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79zm9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75zM7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57a.8.8 0 0 0-.31-.05c-.26 0-.51.1-.71.29l-2.2 2.2a15.15 15.15 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02A11.4 11.4 0 0 1 8.5 4c0-.55-.45-1-1-1" }, child: [] }] })(t);
 }
-function oe(t) {
-  return S({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h12v2H6zm0-3h12v2H6zm0-3h12v2H6z" }, child: [] }] })(t);
+function ve(t) {
+  return k({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h12v2H6zm0-3h12v2H6zm0-3h12v2H6z" }, child: [] }] })(t);
 }
-function ie(t) {
-  return S({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 14H4V8l8 5 8-5zm-8-7L4 6h16z" }, child: [] }] })(t);
+function ye(t) {
+  return k({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 14H4V8l8 5 8-5zm-8-7L4 6h16z" }, child: [] }] })(t);
 }
-const ae = {
+const we = {
   border: "1px solid",
   borderColor: "primary.main"
-}, je = ({ address: t }) => {
-  const e = (r) => {
-    const l = encodeURIComponent(r), i = `comgooglemaps://?q=${l}`;
-    window.location.href = i, setTimeout(() => {
-      const d = `https://www.google.com/maps/search/?api=1&query=${l}`;
-      window.open(d, "_blank");
+}, $e = ({ address: t }) => {
+  const e = (l) => {
+    const s = encodeURIComponent(l), o = `comgooglemaps://?q=${s}`;
+    window.location.href = o, setTimeout(() => {
+      const a = `https://www.google.com/maps/search/?api=1&query=${s}`;
+      window.open(a, "_blank");
     }, 500);
   };
-  return /* @__PURE__ */ P(f, { direction: "row", alignItems: "center", gap: 1, children: [
-    /* @__PURE__ */ o("span", { children: t }),
-    /* @__PURE__ */ o(
-      C,
+  return /* @__PURE__ */ y(E, { direction: "row", alignItems: "center", gap: 1, children: [
+    /* @__PURE__ */ n("span", { children: t }),
+    /* @__PURE__ */ n(
+      S,
       {
         title: "Map",
         size: "small",
         onClick: () => e(t),
-        sx: ae,
-        children: /* @__PURE__ */ o(ce, {})
+        sx: we,
+        children: /* @__PURE__ */ n(pe, {})
       }
     )
   ] });
-}, me = () => {
-  const t = x(() => {
+}, xe = () => {
+  const t = P(() => {
     const u = [
       {
         fn: () => {
-          const n = navigator.userAgentData;
-          return a(n) ? !1 : n.mobile;
+          const c = navigator.userAgentData;
+          return i(c) ? !1 : c.mobile;
         },
         confidence: 100
       },
@@ -210,48 +211,48 @@ const ae = {
       }
     ];
     let m = 0;
-    return G(u, (n) => {
-      m += n.fn() ? n.confidence : 0;
+    return f(u, (c) => {
+      m += c.fn() ? c.confidence : 0;
     }), m >= 100;
-  }, []), e = x(() => /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent), []);
+  }, []), e = P(() => /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent), []);
   return {
     isMobile: t,
     isApple: e
   };
-}, ke = ({ phone: t }) => {
-  const { isMobile: e } = me(), r = (d) => window.open(`tel:${d}`), l = (d) => window.open(`sms:${d}`), i = {
+}, Ge = ({ phone: t }) => {
+  const { isMobile: e } = xe(), l = (a) => window.open(`tel:${a}`), s = (a) => window.open(`sms:${a}`), o = {
     border: "1px solid",
     borderColor: "primary.main"
   };
-  return /* @__PURE__ */ P(f, { direction: "row", alignItems: "center", gap: 1, children: [
-    /* @__PURE__ */ o("span", { children: t }),
-    e && /* @__PURE__ */ o(
-      C,
+  return /* @__PURE__ */ y(E, { direction: "row", alignItems: "center", gap: 1, children: [
+    /* @__PURE__ */ n("span", { children: t }),
+    e && /* @__PURE__ */ n(
+      S,
       {
         title: "Call",
         size: "small",
-        onClick: () => r(t),
-        sx: i,
-        children: /* @__PURE__ */ o(de, {})
+        onClick: () => l(t),
+        sx: o,
+        children: /* @__PURE__ */ n(be, {})
       }
     ),
-    e && /* @__PURE__ */ o(
-      C,
+    e && /* @__PURE__ */ n(
+      S,
       {
         title: "Message",
         size: "small",
-        onClick: () => l(t),
-        sx: i,
-        children: /* @__PURE__ */ o(oe, {})
+        onClick: () => s(t),
+        sx: o,
+        children: /* @__PURE__ */ n(ve, {})
       }
     )
   ] });
-}, De = ({ email: t }) => {
-  const e = (l) => window.open(`mailto:${l}`);
-  return /* @__PURE__ */ P(f, { direction: "row", alignItems: "center", gap: 1, children: [
-    /* @__PURE__ */ o("span", { children: t }),
-    /* @__PURE__ */ o(
-      C,
+}, Ne = ({ email: t }) => {
+  const e = (s) => window.open(`mailto:${s}`);
+  return /* @__PURE__ */ y(E, { direction: "row", alignItems: "center", gap: 1, children: [
+    /* @__PURE__ */ n("span", { children: t }),
+    /* @__PURE__ */ n(
+      S,
       {
         title: "Email",
         size: "small",
@@ -260,72 +261,72 @@ const ae = {
           border: "1px solid",
           borderColor: "primary.main"
         },
-        children: /* @__PURE__ */ o(ie, {})
+        children: /* @__PURE__ */ n(ye, {})
       }
     )
   ] });
 };
-function ue({
+function Ce({
   data: t,
   configuration: e,
-  events: r
+  events: l
 }) {
-  var d, u, m;
-  const l = x(
+  var a, u, m;
+  const s = P(
     () => F([
-      ...N(V(t.map((c) => D(c).filter((s) => {
+      ...W(q(t.map((d) => H(d).filter((r) => {
         var p;
-        return !((p = e == null ? void 0 : e.columns.hidden) != null && p.includes(s));
+        return !((p = e == null ? void 0 : e.columns.hidden) != null && p.includes(r));
       })))),
-      ...D(e == null ? void 0 : e.columns.actions)
-    ], (c) => W(e == null ? void 0 : e.columns.order, (s) => s === c)).map((c) => {
-      let s = {};
-      if (!a(e == null ? void 0 : e.columns.headers) && !a(e.columns.headers[c]) && (s.headerName = e.columns.headers[c]), !a(e == null ? void 0 : e.columns.dimensions) && !a(e.columns.dimensions[c])) {
-        const h = e.columns.dimensions[c];
-        $(h) || (s = {
-          ...s,
+      ...H(e == null ? void 0 : e.columns.actions)
+    ], (d) => U(e == null ? void 0 : e.columns.order, (r) => r === d)).map((d) => {
+      let r = {};
+      if (!i(e == null ? void 0 : e.columns.headers) && !i(e.columns.headers[d]) && (r.headerName = e.columns.headers[d]), !i(e == null ? void 0 : e.columns.dimensions) && !i(e.columns.dimensions[d])) {
+        const h = e.columns.dimensions[d];
+        K(h) || (r = {
+          ...r,
           ...h
         });
       }
-      if (!a(e == null ? void 0 : e.columns.types) && !a(e.columns.types[c]) && (s.type = e.columns.types[c]), !a(e == null ? void 0 : e.columns.actions) && !a(e.columns.actions[c]) && (s.type = "actions", s.getActions = e.columns.actions[c]), !a(e == null ? void 0 : e.columns.customCells) && !a(e.columns.customCells[c])) {
-        const h = e.columns.customCells[c];
-        s.type = "custom", s.renderCell = (v) => {
-          let y = /* @__PURE__ */ o(J, {});
-          return E(h) && B(v.value) && (y = h(v.value, v.row)), y;
+      if (!i(e == null ? void 0 : e.columns.types) && !i(e.columns.types[d]) && (r.type = e.columns.types[d]), !i(e == null ? void 0 : e.columns.actions) && !i(e.columns.actions[d]) && (r.type = "actions", r.getActions = e.columns.actions[d]), !i(e == null ? void 0 : e.columns.customCells) && !i(e.columns.customCells[d])) {
+        const h = e.columns.customCells[d];
+        r.type = "custom", r.renderCell = (b) => {
+          let w = /* @__PURE__ */ n(I, {});
+          return j(h) && L(b.value) && (w = h(b.value, b.row)), w;
         };
       }
-      if (!a(e == null ? void 0 : e.columns.customCellClassNames) && !a(e.columns.customCellClassNames[c])) {
-        const h = e.columns.customCellClassNames[c];
-        s.cellClassName = (v) => {
-          let y = "";
-          return E(h) && (y = h(v)), y;
+      if (!i(e == null ? void 0 : e.columns.customCellClassNames) && !i(e.columns.customCellClassNames[d])) {
+        const h = e.columns.customCellClassNames[d];
+        r.cellClassName = (b) => {
+          let w = "";
+          return j(h) && (w = h(b)), w;
         };
       }
-      return !a(e == null ? void 0 : e.columns.formats) && !a(e.columns.formats[c]) && (s.valueFormatter = e.columns.formats[c]), {
-        field: c,
-        ...s
+      return !i(e == null ? void 0 : e.columns.formats) && !i(e.columns.formats[d]) && (r.valueFormatter = e.columns.formats[d]), {
+        field: d,
+        ...r
       };
     }),
     [e, t]
-  ), i = (n) => {
-    r != null && r.onRowSelection && r.onRowSelection(n);
+  ), o = (c) => {
+    l != null && l.onRowSelection && l.onRowSelection(c);
   };
-  return /* @__PURE__ */ o(
-    Y,
+  return /* @__PURE__ */ n(
+    re,
     {
       getRowHeight: e == null ? void 0 : e.getRowHeight,
       autoPageSize: !0,
       disableColumnFilter: !0,
-      checkboxSelection: (d = e == null ? void 0 : e.selection) == null ? void 0 : d.multiSelect,
+      checkboxSelection: (a = e == null ? void 0 : e.selection) == null ? void 0 : a.multiSelect,
       disableMultipleRowSelection: !((u = e == null ? void 0 : e.selection) != null && u.multiSelect),
       isRowSelectable: () => {
-        var n;
-        return !((n = e == null ? void 0 : e.selection) != null && n.disabled);
+        var c;
+        return !((c = e == null ? void 0 : e.selection) != null && c.disabled);
       },
-      columns: l,
+      columns: s,
       rows: t,
       rowSelectionModel: (m = e == null ? void 0 : e.selection) == null ? void 0 : m.model,
-      onRowSelectionModelChange: i,
+      onRowSelectionModelChange: o,
       sx: {
         border: "2px solid var(--mui-palette-borders-main)",
         "& .MuiDataGrid-cell": {
@@ -344,61 +345,115 @@ function ue({
     }
   );
 }
-const he = "_addableGridList_fpq0x_1", pe = {
-  addableGridList: he
-}, Ee = ({
+const Oe = "_addableGridList_fpq0x_1", Pe = {
+  addableGridList: Oe
+}, Ve = ({
   data: t,
   addItemDialog: e,
-  configuration: r,
-  events: l
-}) => /* @__PURE__ */ P("div", { className: pe.addableGridList, children: [
-  /* @__PURE__ */ o("div", { children: /* @__PURE__ */ o("div", { children: /* @__PURE__ */ o(
-    ue,
+  configuration: l,
+  events: s
+}) => /* @__PURE__ */ y("div", { className: Pe.addableGridList, children: [
+  /* @__PURE__ */ n("div", { children: /* @__PURE__ */ n("div", { children: /* @__PURE__ */ n(
+    Ce,
     {
       data: t,
-      configuration: r,
-      events: l
+      configuration: l,
+      events: s
     }
   ) }) }),
   e
-] }), be = (t) => B(t) || q(t) || typeof t == "bigint" || U(t) || a(t) || K(t);
-var ve = /* @__PURE__ */ ((t) => (t.SET = "set", t.UPDATE = "update", t.DRAFT = "draft", t))(ve || {});
-const z = {
+] }), Se = "_colorPickerButton_142zf_1", Me = {
+  colorPickerButton: Se
+}, ze = () => ({
+  randomHex: () => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")
+}), ke = (t) => L(t) || J(t) || typeof t == "bigint" || Q(t) || i(t) || X(t);
+var O = /* @__PURE__ */ ((t) => (t.SET = "set", t.UPDATE = "update", t.DRAFT = "draft", t))(O || {});
+const D = {
   set: (t, e) => e.value,
   update: (t, e) => e.updateFn(t),
-  draft: (t, e) => T(t, e.draftFn)
-}, ye = (t, e) => {
+  draft: (t, e) => V(t, e.draftFn)
+}, De = (t, e) => {
   switch (e.type) {
     case "set":
-      return z[e.type](t, e);
+      return D[e.type](t, e);
     case "update":
-      return z[e.type](t, e);
+      return D[e.type](t, e);
     case "draft":
-      return z[e.type](t, e);
+      return D[e.type](t, e);
   }
-}, we = () => (t, e) => ye(t, e), Ae = (t) => R(we(), be(t) ? t : g(t)), He = () => ({
-  randomHex: () => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")
-}), _e = _({
+}, je = () => (t, e) => De(t, e), R = (t) => N(je(), ke(t) ? t : Y(t)), fe = ({
+  color: t,
+  onChange: e,
+  configuration: l
+}) => {
+  const { randomHex: s } = ze(), [o, a] = R(t || new ce(s())), [u, m] = R(!1), c = i(l == null ? void 0 : l.size) ? 35 : l.size, C = i(l == null ? void 0 : l.padding) ? 5 : l.padding, d = i(l == null ? void 0 : l.borderRadius) ? 5 : l.borderRadius, r = i(l == null ? void 0 : l.allowDialog) ? !0 : l.allowDialog, p = () => {
+    m({
+      type: O.SET,
+      value: !0
+    });
+  }, h = () => {
+    m({
+      type: O.SET,
+      value: !1
+    });
+  };
+  return /* @__PURE__ */ y(I, { children: [
+    /* @__PURE__ */ n(
+      "div",
+      {
+        className: Me.colorPickerButton,
+        style: {
+          width: `${c}px`,
+          height: `${c}px`,
+          borderRadius: `${d}px`,
+          padding: `${C}px`,
+          cursor: r ? "pointer" : "default"
+        },
+        onClick: p,
+        children: /* @__PURE__ */ n("div", { style: {
+          backgroundColor: o == null ? void 0 : o.toHexString(),
+          borderRadius: `${d}px`
+        } })
+      }
+    ),
+    r && /* @__PURE__ */ y(ee, { open: u, onClose: h, children: [
+      /* @__PURE__ */ n(te, { children: /* @__PURE__ */ n(
+        ne,
+        {
+          defaultValue: o,
+          onChange: (b) => {
+            a({
+              type: O.SET,
+              value: b
+            }), j(e) && e(b);
+          }
+        }
+      ) }),
+      /* @__PURE__ */ n(le, { children: /* @__PURE__ */ n(se, { onClick: h, children: "Close" }) })
+    ] })
+  ] });
+}, Fe = T({
   palette: {
     mode: "light"
   }
-}), Be = _({
+}), We = T({
   palette: {
     mode: "dark"
   }
 });
 export {
-  ve as ActionType,
-  je as ActiveAddress,
-  De as ActiveEmail,
-  ke as ActivePhone,
-  Ee as AddableGridList,
-  fe as ButtonSelect,
-  ue as GridList,
-  Be as darkTheme,
-  _e as lightTheme,
-  He as useColor,
-  me as useDevice,
-  Ae as useImducer
+  O as ActionType,
+  $e as ActiveAddress,
+  Ne as ActiveEmail,
+  Ge as ActivePhone,
+  Ve as AddableGridList,
+  Ie as ButtonSelect,
+  fe as ColorPickerButton,
+  Ce as GridList,
+  We as darkTheme,
+  Fe as lightTheme,
+  ze as useColor,
+  xe as useDevice,
+  R as useImducer
 };
 //# sourceMappingURL=index.js.map

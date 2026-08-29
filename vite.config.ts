@@ -49,6 +49,7 @@ export default defineConfig({
         'lodash',
         'dayjs',
         'immer',
+        '@rc-component/color-picker',
       ],
     },
     sourcemap: true,

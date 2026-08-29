@@ -21,6 +21,9 @@ export type {
 export { AddableGridList } from './components/AddableGridList';
 export type { AddableGridListProps } from './components/AddableGridList';
 
+export { ColorPickerButton } from './components/ColorPickerButton';
+export type { ColorPickerButtonProps, Color } from './components/ColorPickerButton';
+
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 
