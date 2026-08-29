@@ -88,6 +88,7 @@ function Root() {
 | `ActivePhone`  | Renders a phone number with call and message buttons that are shown on mobile devices only.    |
 | `ActiveEmail`  | Renders an email address with a button that opens a `mailto:` link in a new tab.               |
 | `GridList`     | MUI X `DataGrid`-based list built from plain data rows with declarative column/selection configuration. |
+| `AddableGridList` | `GridList` wrapped in a fill-height layout with an add-item dialog slot.                         |
 
 ### `ActiveAddress` props
 
@@ -155,6 +156,42 @@ function App() {
           formats: { age: (value) => `${String(value)} yrs` },
         },
       }}
+    />
+  );
+}
+```
+
+### `AddableGridList` props
+
+| Prop              | Type                   | Description                                                   |
+| ----------------- | ---------------------- | ------------------------------------------------------------- |
+| `data`            | `T[]`                  | The rows to display (see `GridList`).                         |
+| `addItemDialog`   | `ReactNode`            | Content rendered below the grid (e.g. a MUI `Dialog`).        |
+| `configuration?`  | `GridConfiguration<T>` | Column/selection configuration (see `GridList`).              |
+| `events?`         | `GridEvents`           | Grid interaction callbacks (see `GridList`).                  |
+
+`AddableGridList` is a layout wrapper: it renders a `GridList` inside a fill-height flex column with the `addItemDialog` rendered beneath it. All grid behavior, props, and types are the same as `GridList`.
+
+Because `AddableGridList` ships a CSS module for its layout, consumers should import the emitted stylesheet once:
+
+```tsx
+import '@mr-skribbls/react-mui-base-components/react-mui-base-components.css';
+```
+
+```tsx
+import { AddableGridList } from '@mr-skribbls/react-mui-base-components';
+
+const pets = [
+  { id: 1, name: 'Cat', age: 3 },
+  { id: 2, name: 'Dog', age: 5 },
+];
+
+function App() {
+  return (
+    <AddableGridList
+      data={pets}
+      addItemDialog={<AddPetDialog />}
+      configuration={{ columns: { headers: { name: 'Name' } } }}
     />
   );
 }

@@ -18,6 +18,9 @@ export type {
   GridEvents,
 } from './components/GridList';
 
+export { AddableGridList } from './components/AddableGridList';
+export type { AddableGridListProps } from './components/AddableGridList';
+
 export { useDevice } from './hooks';
 export type { DeviceInfo } from './hooks';
 
