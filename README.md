@@ -123,7 +123,7 @@ The Storybook is configured with **light/dark theme switching** via `@storybook/
 npm run build      # typecheck + build ESM bundle and type declarations to dist/
 ```
 
-Output lands in `dist/` (ESM `index.js` + `*.d.ts`). The bundle externalizes `react`, `react-dom`, all `@mui/*`/`@emotion/*` packages, and `lodash`.
+Output lands in `dist/` (ESM `index.js`, CJS `index.cjs`, and `*.d.ts`). The bundle externalizes `react`, `react-dom`, all `@mui/*`/`@emotion/*` packages, and `lodash`.
 
 ### Type-checking
 
