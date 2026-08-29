@@ -1,0 +1,72 @@
+{
+  "name": "@mr-skribbls/react-mui-base-components",
+  "version": "0.1.0",
+  "description": "A library of base React MUI (Material UI) components.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "npm run typecheck && vite build",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist storybook-static",
+    "storybook": "storybook dev -p 6006"
+  },
+  "keywords": [
+    "react",
+    "mui",
+    "material-ui",
+    "components",
+    "component-library"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mr-Skribbls/React-MUI-Base-Components.git"
+  },
+  "homepage": "https://github.com/Mr-Skribbls/React-MUI-Base-Components",
+  "bugs": {
+    "url": "https://github.com/Mr-Skribbls/React-MUI-Base-Components/issues"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "latest",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.11",
+    "@mui/system": "^7.3.11",
+    "@storybook/addon-a11y": "^10.5.10",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/addon-themes": "^10.5.10",
+    "@storybook/react-vite": "^10.5.10",
+    "@types/lodash": "^4.17.25",
+    "@vitejs/plugin-react": "^4.7.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "storybook": "^10.5.10",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.3",
+    "vite-plugin-dts": "^5.0.3"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
+  }
+}
