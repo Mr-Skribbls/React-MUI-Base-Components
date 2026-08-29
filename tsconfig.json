@@ -23,6 +23,8 @@
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
 
+    "types": ["@testing-library/jest-dom/vitest"],
+
     "paths": {
       "@/*": ["./src/*"]
     }
