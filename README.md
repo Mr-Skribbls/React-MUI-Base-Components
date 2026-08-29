@@ -217,6 +217,7 @@ Where `V` and `D` are `number | string`, and options may be primitives (e.g. `st
 | ----------- | -------------------------------------------------------------------------------- |
 | `useDevice` | Detects the device's form factor and platform, returning `isMobile` and `isApple`. |
 | `useImducer` | React state built on `useReducer` with Immer support for `SET`, `UPDATE`, and `DRAFT` actions. |
+| `useColor` | Generates random hex colors via a `randomHex` helper. |
 
 ### `useDevice`
 
@@ -278,6 +279,25 @@ function App() {
       Birthday
     </button>
   );
+}
+```
+
+### `useColor`
+
+`useColor` returns a `randomHex` helper that generates a random hex color string.
+
+| Return      | Type               | Description                             |
+| ----------- | ------------------ | --------------------------------------- |
+| `randomHex` | `() => string`     | Returns a random color as `#RRGGBB`.    |
+
+```tsx
+import { useColor } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { randomHex } = useColor();
+  const [color, setColor] = useState(randomHex);
+
+  return <button onClick={() => setColor(randomHex())}>{color}</button>;
 }
 ```
 

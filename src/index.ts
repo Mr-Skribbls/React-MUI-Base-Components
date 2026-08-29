@@ -27,4 +27,6 @@ export type { DeviceInfo } from './hooks/useDevice';
 export { useImducer, ActionType } from './hooks/useImducer';
 export type { ImducerAction } from './hooks/useImducer';
 
+export { useColor } from './hooks/useColor';
+
 export { lightTheme, darkTheme } from './theme';
