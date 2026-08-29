@@ -30,7 +30,7 @@ npm install github:Mr-Skribbls/React-MUI-Base-Components#semver:^0.1.0
 You must install the library's peer dependencies yourself (they are not bundled):
 
 ```bash
-npm install react react-dom @mui/material @emotion/react @emotion/styled
+npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/x-data-grid dayjs
 ```
 
 `lodash` is a regular runtime dependency and is installed automatically.
@@ -87,6 +87,7 @@ function Root() {
 | `ActiveAddress`| Renders an address with a map button that deep-links to the Google Maps app and falls back to the web in a browser. |
 | `ActivePhone`  | Renders a phone number with call and message buttons that are shown on mobile devices only.    |
 | `ActiveEmail`  | Renders an email address with a button that opens a `mailto:` link in a new tab.               |
+| `GridList`     | MUI X `DataGrid`-based list built from plain data rows with declarative column/selection configuration. |
 
 ### `ActiveAddress` props
 
@@ -111,6 +112,53 @@ The call (`tel:` link) and message (`sms:` link) buttons are rendered only on mo
 | `email` | `string` | The email address to display and open as a `mailto:` link.          |
 
 Clicking the email button opens the user's mail client via a `mailto:` link in a new tab.
+
+### `GridList` props
+
+| Prop            | Type                            | Description                                                              |
+| --------------- | ------------------------------- | ------------------------------------------------------------------------ |
+| `data`          | `T[]`                           | The rows to display. Each row must have a unique `id` (`number`/`string`). |
+| `configuration?`| `GridConfiguration<T>`          | Declarative column and selection setup (see below).                      |
+| `events?`       | `GridEvents`                    | Callbacks (`onRowSelection`) for grid interactions.                      |
+
+`GridList` derives its columns from the union of keys found in `data`. The `configuration` object tailors them:
+
+| `configuration.columns` key | Type    | Description                                                      |
+| --------------------------- | ------- | ---------------------------------------------------------------- |
+| `hidden`                    | `(keyof T)[]` | Keys to exclude from the grid.                              |
+| `order`                     | array   | Column key ordering (columns not listed are appended).           |
+| `headers`                   | object  | `{ [field]: string }` header labels.                             |
+| `types`                     | object  | `{ [field]: GridColType }` column types.                         |
+| `actions`                   | object  | `{ [field]: (params) => ReactElement[] }` action column renderers. |
+| `customCells`               | object  | `{ [field]: (value, row) => ReactNode }` custom cell renderers.  |
+| `customCellClassNames`      | object  | `{ [field]: (params) => string }` per-cell CSS class names.      |
+| `formats`                   | object  | `{ [field]: (value) => unknown }` cell value formatters.         |
+| `dimensions`                | object  | `{ [field]: { width?, minWidth?, maxWidth?, flex? } }` column sizes. |
+
+Selection is disabled by default. Enable it with `configuration.selection.multiSelect` (checkbox selection) and react to changes via `events.onRowSelection`. A controlled selection model can be passed with `configuration.selection.model`; use `configuration.selection.disabled` to disable row selection entirely. `configuration.getRowHeight` is forwarded straight to the `DataGrid`.
+
+```tsx
+import { GridList } from '@mr-skribbls/react-mui-base-components';
+
+const pets = [
+  { id: 1, name: 'Cat', age: 3 },
+  { id: 2, name: 'Dog', age: 5 },
+];
+
+function App() {
+  return (
+    <GridList
+      data={pets}
+      configuration={{
+        columns: {
+          headers: { name: 'Name', age: 'Age (years)' },
+          formats: { age: (value) => `${String(value)} yrs` },
+        },
+      }}
+    />
+  );
+}
+```
 
 ### `ButtonSelect` props
 

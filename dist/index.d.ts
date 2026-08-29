@@ -6,6 +6,8 @@ export { ActivePhone } from './components/ActivePhone';
 export type { ActivePhoneProps } from './components/ActivePhone';
 export { ActiveEmail } from './components/ActiveEmail';
 export type { ActiveEmailProps } from './components/ActiveEmail';
+export { GridList } from './components/GridList';
+export type { GridListProps, GridData, GridConfiguration, GridEvents, } from './components/GridList';
 export { useDevice } from './hooks';
 export type { DeviceInfo } from './hooks';
 export { lightTheme, darkTheme } from './theme';
