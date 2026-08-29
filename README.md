@@ -108,6 +108,35 @@ Clicking the map button attempts to open the native Google Maps app (`comgooglem
 
 Where `V` and `D` are `number | string`, and options may be primitives (e.g. `string[]`) or objects (using `valueProp`/`displayProp`).
 
+## Hooks
+
+| Hook        | Description                                                                     |
+| ----------- | -------------------------------------------------------------------------------- |
+| `useDevice` | Detects the device's form factor and platform, returning `isMobile` and `isApple`. |
+
+### `useDevice`
+
+| Return   | Type      | Description                                                                 |
+| -------- | --------- | --------------------------------------------------------------------------- |
+| `isMobile` | `boolean` | `true` when the current device is a mobile/tablet form factor.               |
+| `isApple`  | `boolean` | `true` when the current device is made by Apple (iPhone/iPad/iPod/Mac).      |
+
+`isMobile` is a confidence-weighted vote across four detection strategies: Client Hints (`navigator.userAgentData.mobile`, 100), user-agent sniffing (60), touch support via `navigator.maxTouchPoints` (20), and screen width via `matchMedia('(max-width: 768px)')` (20). The device is considered mobile when the combined confidence reaches 100.
+
+```tsx
+import { useDevice } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { isMobile, isApple } = useDevice();
+
+  if (isApple) {
+    return <span>Running on Apple hardware</span>;
+  }
+
+  return <span>{isMobile ? 'Mobile' : 'Desktop'}</span>;
+}
+```
+
 ## Development
 
 ### Storybook

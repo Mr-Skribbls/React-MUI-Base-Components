@@ -1,48 +1,48 @@
-import { createTheme as y } from "@mui/material/styles";
-import { jsx as d, jsxs as x } from "react/jsx-runtime";
-import { ToggleButtonGroup as C, ToggleButton as N, Stack as S, IconButton as k } from "@mui/material";
-import c, { useCallback as p, useMemo as z } from "react";
-import f from "lodash";
-const $ = ({
+import { createTheme as w } from "@mui/material/styles";
+import { jsx as d, jsxs as S } from "react/jsx-runtime";
+import { ToggleButtonGroup as C, ToggleButton as D, Stack as N, IconButton as k } from "@mui/material";
+import u, { useCallback as v, useMemo as p } from "react";
+import m, { forEach as E, isNil as M } from "lodash";
+const F = ({
   options: e,
-  onChange: r,
+  onChange: n,
   label: t,
-  selectedOption: n,
-  disabled: l,
-  displayProp: i,
+  selectedOption: r,
+  disabled: a,
+  displayProp: c,
   valueProp: s
 }) => {
-  const u = p(
-    (o) => {
-      if (!f.isNil(o))
-        return f.isNil(s) ? o : o[s];
+  const l = v(
+    (i) => {
+      if (!m.isNil(i))
+        return m.isNil(s) ? i : i[s];
     },
     [s]
-  ), a = p(
-    (o) => f.isNil(i) ? o : o[i],
-    [i]
-  ), j = z(() => u(n), [u, n]);
+  ), o = v(
+    (i) => m.isNil(c) ? i : i[c],
+    [c]
+  ), j = p(() => l(r), [l, r]);
   return /* @__PURE__ */ d(
     C,
     {
       color: "primary",
       value: j,
       exclusive: !0,
-      onChange: (o, m) => {
-        r(m);
+      onChange: (i, f) => {
+        n(f);
       },
       "aria-label": t ?? "Select an option",
-      children: f.chain(e).map((o) => {
-        const m = u(o), P = a(o);
-        return { option: o, value: m, display: P };
-      }).filter((o) => !f.isNil(o.value)).value().map(({ value: o, display: m }) => /* @__PURE__ */ d(
-        N,
+      children: m.chain(e).map((i) => {
+        const f = l(i), x = o(i);
+        return { option: i, value: f, display: x };
+      }).filter((i) => !m.isNil(i.value)).value().map(({ value: i, display: f }) => /* @__PURE__ */ d(
+        D,
         {
-          value: o,
-          disabled: l,
-          children: m
+          value: i,
+          disabled: a,
+          children: f
         },
-        o
+        i
       ))
     }
   );
@@ -53,141 +53,174 @@ var O = {
   className: void 0,
   style: void 0,
   attr: void 0
-}, b = c.createContext && /* @__PURE__ */ c.createContext(O), _ = ["attr", "size", "title"];
-function E(e, r) {
+}, b = u.createContext && /* @__PURE__ */ u.createContext(O), z = ["attr", "size", "title"];
+function A(e, n) {
   if (e == null) return {};
-  var t, n, l = T(e, r);
+  var t, r, a = _(e, n);
   if (Object.getOwnPropertySymbols) {
-    var i = Object.getOwnPropertySymbols(e);
-    for (n = 0; n < i.length; n++) t = i[n], r.indexOf(t) === -1 && {}.propertyIsEnumerable.call(e, t) && (l[t] = e[t]);
+    var c = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < c.length; r++) t = c[r], n.indexOf(t) === -1 && {}.propertyIsEnumerable.call(e, t) && (a[t] = e[t]);
   }
-  return l;
+  return a;
 }
-function T(e, r) {
+function _(e, n) {
   if (e == null) return {};
   var t = {};
-  for (var n in e) if ({}.hasOwnProperty.call(e, n)) {
-    if (r.indexOf(n) !== -1) continue;
-    t[n] = e[n];
+  for (var r in e) if ({}.hasOwnProperty.call(e, r)) {
+    if (n.indexOf(r) !== -1) continue;
+    t[r] = e[r];
   }
   return t;
 }
 function g() {
   return g = Object.assign ? Object.assign.bind() : function(e) {
-    for (var r = 1; r < arguments.length; r++) {
-      var t = arguments[r];
-      for (var n in t) ({}).hasOwnProperty.call(t, n) && (e[n] = t[n]);
+    for (var n = 1; n < arguments.length; n++) {
+      var t = arguments[n];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (e[r] = t[r]);
     }
     return e;
   }, g.apply(null, arguments);
 }
-function v(e, r) {
+function y(e, n) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
-    var n = Object.getOwnPropertySymbols(e);
-    r && (n = n.filter(function(l) {
-      return Object.getOwnPropertyDescriptor(e, l).enumerable;
-    })), t.push.apply(t, n);
+    var r = Object.getOwnPropertySymbols(e);
+    n && (r = r.filter(function(a) {
+      return Object.getOwnPropertyDescriptor(e, a).enumerable;
+    })), t.push.apply(t, r);
   }
   return t;
 }
 function h(e) {
-  for (var r = 1; r < arguments.length; r++) {
-    var t = arguments[r] != null ? arguments[r] : {};
-    r % 2 ? v(Object(t), !0).forEach(function(n) {
-      I(e, n, t[n]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : v(Object(t)).forEach(function(n) {
-      Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n));
+  for (var n = 1; n < arguments.length; n++) {
+    var t = arguments[n] != null ? arguments[n] : {};
+    n % 2 ? y(Object(t), !0).forEach(function(r) {
+      T(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : y(Object(t)).forEach(function(r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
     });
   }
   return e;
 }
-function I(e, r, t) {
-  return (r = M(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e;
+function T(e, n, t) {
+  return (n = B(n)) in e ? Object.defineProperty(e, n, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[n] = t, e;
 }
-function M(e) {
-  var r = B(e, "string");
-  return typeof r == "symbol" ? r : r + "";
+function B(e) {
+  var n = I(e, "string");
+  return typeof n == "symbol" ? n : n + "";
 }
-function B(e, r) {
+function I(e, n) {
   if (typeof e != "object" || !e) return e;
   var t = e[Symbol.toPrimitive];
   if (t !== void 0) {
-    var n = t.call(e, r);
-    if (typeof n != "object") return n;
+    var r = t.call(e, n);
+    if (typeof r != "object") return r;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return (r === "string" ? String : Number)(e);
+  return (n === "string" ? String : Number)(e);
 }
-function w(e) {
-  return e && e.map((r, t) => /* @__PURE__ */ c.createElement(r.tag, h({
+function P(e) {
+  return e && e.map((n, t) => /* @__PURE__ */ u.createElement(n.tag, h({
     key: t
-  }, r.attr), w(r.child)));
-}
-function D(e) {
-  return (r) => /* @__PURE__ */ c.createElement(V, g({
-    attr: h({}, e.attr)
-  }, r), w(e.child));
+  }, n.attr), P(n.child)));
 }
 function V(e) {
-  var r = (t) => {
-    var n = e.attr, l = e.size, i = e.title, s = E(e, _), u = l || t.size || "1em", a;
-    return t.className && (a = t.className), e.className && (a = (a ? a + " " : "") + e.className), /* @__PURE__ */ c.createElement("svg", g({
+  return (n) => /* @__PURE__ */ u.createElement(W, g({
+    attr: h({}, e.attr)
+  }, n), P(e.child));
+}
+function W(e) {
+  var n = (t) => {
+    var r = e.attr, a = e.size, c = e.title, s = A(e, z), l = a || t.size || "1em", o;
+    return t.className && (o = t.className), e.className && (o = (o ? o + " " : "") + e.className), /* @__PURE__ */ u.createElement("svg", g({
       stroke: "currentColor",
       fill: "currentColor",
       strokeWidth: "0"
-    }, t.attr, n, s, {
-      className: a,
+    }, t.attr, r, s, {
+      className: o,
       style: h(h({
         color: e.color || t.color
       }, t.style), e.style),
-      height: u,
-      width: u,
+      height: l,
+      width: l,
       xmlns: "http://www.w3.org/2000/svg"
-    }), i && /* @__PURE__ */ c.createElement("title", null, i), e.children);
+    }), c && /* @__PURE__ */ u.createElement("title", null, c), e.children);
   };
-  return b !== void 0 ? /* @__PURE__ */ c.createElement(b.Consumer, null, (t) => r(t)) : r(O);
+  return b !== void 0 ? /* @__PURE__ */ u.createElement(b.Consumer, null, (t) => n(t)) : n(O);
 }
-function A(e) {
-  return D({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "m20.5 3-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M10 5.47l4 1.4v11.66l-4-1.4zm-5 .99 3-1.01v11.7l-3 1.16zm14 11.08-3 1.01V6.86l3-1.16z" }, child: [] }] })(e);
+function H(e) {
+  return V({ attr: { viewBox: "0 0 24 24" }, child: [{ tag: "path", attr: { fill: "none", d: "M0 0h24v24H0z" }, child: [] }, { tag: "path", attr: { d: "m20.5 3-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M10 5.47l4 1.4v11.66l-4-1.4zm-5 .99 3-1.01v11.7l-3 1.16zm14 11.08-3 1.01V6.86l3-1.16z" }, child: [] }] })(e);
 }
 const L = {
   border: "1px solid",
   borderColor: "primary.main"
-}, H = ({ address: e }) => {
-  const r = (t) => {
-    const n = encodeURIComponent(t), l = `comgooglemaps://?q=${n}`;
-    window.location.href = l, setTimeout(() => {
-      const i = `https://www.google.com/maps/search/?api=1&query=${n}`;
-      window.open(i, "_blank");
+}, J = ({ address: e }) => {
+  const n = (t) => {
+    const r = encodeURIComponent(t), a = `comgooglemaps://?q=${r}`;
+    window.location.href = a, setTimeout(() => {
+      const c = `https://www.google.com/maps/search/?api=1&query=${r}`;
+      window.open(c, "_blank");
     }, 500);
   };
-  return /* @__PURE__ */ x(S, { direction: "row", alignItems: "center", gap: 1, children: [
+  return /* @__PURE__ */ S(N, { direction: "row", alignItems: "center", gap: 1, children: [
     /* @__PURE__ */ d("span", { children: e }),
     /* @__PURE__ */ d(
       k,
       {
         title: "Map",
         size: "small",
-        onClick: () => r(e),
+        onClick: () => n(e),
         sx: L,
-        children: /* @__PURE__ */ d(A, {})
+        children: /* @__PURE__ */ d(H, {})
       }
     )
   ] });
-}, F = y({
+}, Q = () => {
+  const e = p(() => {
+    const s = [
+      {
+        fn: () => {
+          const o = navigator.userAgentData;
+          return M(o) ? !1 : o.mobile;
+        },
+        confidence: 100
+      },
+      {
+        fn: () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        confidence: 60
+      },
+      {
+        fn: () => navigator.maxTouchPoints > 0,
+        confidence: 20
+      },
+      {
+        fn: () => window.matchMedia("(max-width: 768px)").matches,
+        confidence: 20
+      }
+    ];
+    let l = 0;
+    return E(s, (o) => {
+      l += o.fn() ? o.confidence : 0;
+    }), l >= 100;
+  }, []), n = p(() => /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent), []);
+  return {
+    isMobile: e,
+    isApple: n
+  };
+}, X = w({
   palette: {
     mode: "light"
   }
-}), J = y({
+}), Y = w({
   palette: {
     mode: "dark"
   }
 });
 export {
-  H as ActiveAddress,
-  $ as ButtonSelect,
-  J as darkTheme,
-  F as lightTheme
+  J as ActiveAddress,
+  F as ButtonSelect,
+  Y as darkTheme,
+  X as lightTheme,
+  Q as useDevice
 };
 //# sourceMappingURL=index.js.map
