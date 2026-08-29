@@ -7,6 +7,9 @@ export type { ActiveAddressProps } from './components/ActiveAddress';
 export { ActivePhone } from './components/ActivePhone';
 export type { ActivePhoneProps } from './components/ActivePhone';
 
+export { ActiveEmail } from './components/ActiveEmail';
+export type { ActiveEmailProps } from './components/ActiveEmail';
+
 export { useDevice } from './hooks';
 export type { DeviceInfo } from './hooks';
 
