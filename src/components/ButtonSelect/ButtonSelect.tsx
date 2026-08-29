@@ -1,5 +1,5 @@
 import { useCallback, MouseEvent, useMemo } from 'react';
-import { chain, isNil } from 'lodash';
+import _ from 'lodash';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 type SpecificTypeKeys<T, V extends number | string> = {
@@ -35,8 +35,8 @@ export const ButtonSelect = <
 }: ButtonSelectProps<T, V, D>) => {
   const getOptionValue = useCallback(
     (option?: T) => {
-      if (isNil(option)) return undefined;
-      if (isNil(valueProp)) return option as unknown as V;
+      if (_.isNil(option)) return undefined;
+      if (_.isNil(valueProp)) return option as unknown as V;
       return option[valueProp];
     },
     [valueProp],
@@ -44,7 +44,7 @@ export const ButtonSelect = <
 
   const getOptionDisplay = useCallback(
     (option: T) => {
-      if (isNil(displayProp)) return option as number | string;
+      if (_.isNil(displayProp)) return option as number | string;
       return option[displayProp];
     },
     [displayProp],
@@ -67,13 +67,13 @@ export const ButtonSelect = <
       onChange={handleChange}
       aria-label={label ?? 'Select an option'}
     >
-      {chain(options)
+      {_.chain(options)
         .map((option) => {
           const value = getOptionValue(option);
           const display = getOptionDisplay(option);
           return { option, value, display };
         })
-        .filter((a) => !isNil(a.value))
+        .filter((a) => !_.isNil(a.value))
         .value()
         .map(({ value, display }) => {
           return (

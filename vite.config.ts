@@ -27,8 +27,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(dirname, 'src/index.ts'),
       name: 'ReactMuiBaseComponents',
-      formats: ['es'],
-      fileName: 'index',
+      formats: ['es', 'cjs'],
+      fileName: (format) => (format === 'es' ? 'index.js' : 'index.cjs'),
     },
     rollupOptions: {
       external: [
