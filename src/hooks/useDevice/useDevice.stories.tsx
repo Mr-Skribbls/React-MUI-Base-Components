@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useDevice } from './useDevice';
+import { useDevice } from '.';
 
 const DeviceInfoDisplay = () => {
   const { isMobile, isApple } = useDevice();

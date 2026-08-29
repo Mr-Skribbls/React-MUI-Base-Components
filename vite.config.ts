@@ -48,6 +48,7 @@ export default defineConfig({
         '@emotion/styled',
         'lodash',
         'dayjs',
+        'immer',
       ],
     },
     sourcemap: true,

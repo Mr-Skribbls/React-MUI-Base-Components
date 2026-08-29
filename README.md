@@ -216,6 +216,7 @@ Where `V` and `D` are `number | string`, and options may be primitives (e.g. `st
 | Hook        | Description                                                                     |
 | ----------- | -------------------------------------------------------------------------------- |
 | `useDevice` | Detects the device's form factor and platform, returning `isMobile` and `isApple`. |
+| `useImducer` | React state built on `useReducer` with Immer support for `SET`, `UPDATE`, and `DRAFT` actions. |
 
 ### `useDevice`
 
@@ -237,6 +238,46 @@ function App() {
   }
 
   return <span>{isMobile ? 'Mobile' : 'Desktop'}</span>;
+}
+```
+
+### `useImducer`
+
+`useImducer` is a `useReducer`-based state hook that accepts Immer-flavored actions. It returns the same `[state, dispatch]` API as `useReducer`.
+
+| Action       | Shape                                        | Behavior                                             |
+| ------------ | ------------------------------------------- | ---------------------------------------------------- |
+| `ActionType.SET` | `{ type: 'set', value: T }`             | Replaces the entire state.                           |
+| `ActionType.UPDATE` | `{ type: 'update', updateFn: (prev) => T }` | Builds the next state from the previous one.         |
+| `ActionType.DRAFT` | `{ type: 'draft', draftFn: (draft) => void }` | Mutates an Immer `draft` of the state in place.      |
+
+The initial state is deep-cloned when it is a non-primitive, so mutating it via `DRAFT` never leaks back into the caller's object.
+
+```tsx
+import { ActionType, useImducer } from '@mr-skribbls/react-mui-base-components';
+
+interface Profile {
+  name: string;
+  details: { age: number };
+}
+
+function App() {
+  const [profile, dispatch] = useImducer<Profile>({ name: 'Alex', details: { age: 30 } });
+
+  return (
+    <button
+      onClick={() =>
+        dispatch({
+          type: ActionType.DRAFT,
+          draftFn: (draft) => {
+            draft.details.age += 1;
+          },
+        })
+      }
+    >
+      Birthday
+    </button>
+  );
 }
 ```
 

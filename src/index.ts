@@ -21,7 +21,10 @@ export type {
 export { AddableGridList } from './components/AddableGridList';
 export type { AddableGridListProps } from './components/AddableGridList';
 
-export { useDevice } from './hooks';
-export type { DeviceInfo } from './hooks';
+export { useDevice } from './hooks/useDevice';
+export type { DeviceInfo } from './hooks/useDevice';
+
+export { useImducer, ActionType } from './hooks/useImducer';
+export type { ImducerAction } from './hooks/useImducer';
 
 export { lightTheme, darkTheme } from './theme';
