@@ -36,6 +36,9 @@ export type { ResponsiveButtonProps } from './components/ResponsiveButton';
 export { HorizontalTabDisplay } from './components/HorizontalTabDisplay';
 export type { HorizontalTabDisplayProps, HorizontalTab } from './components/HorizontalTabDisplay';
 
+export { VerticalTabDisplay } from './components/VerticalTabDisplay';
+export type { VerticalTabDisplayProps, VerticalTab } from './components/VerticalTabDisplay';
+
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 

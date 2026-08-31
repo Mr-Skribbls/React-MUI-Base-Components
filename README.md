@@ -94,6 +94,7 @@ function Root() {
 | `FieldContainer`    | An MUI `Stack` wrapper for form fields with optional drag-and-drop handlers.                     |
 | `ResponsiveButton`  | A button that shows full text on desktop and icon-only on mobile via CSS media queries.            |
 | `HorizontalTabDisplay` | A horizontal tabbed panel powered by MUI `Tabs`.                                               |
+| `VerticalTabDisplay`  | A responsive tabbed panel: vertical on desktop, horizontal on mobile (< 600px).                  |
 
 ### `ActiveAddress` props
 
@@ -455,6 +456,36 @@ const tabs = [
 
 function App() {
   return <HorizontalTabDisplay tabs={tabs} ariaLabel='Demo' />;
+}
+```
+
+### `VerticalTabDisplay` props
+
+| Prop        | Type              | Description                                                 |
+| ----------- | ----------------- | ----------------------------------------------------------- |
+| `tabs`      | `VerticalTab[]`   | Array of tab objects to render (see `VerticalTab` below).    |
+| `ariaLabel?`| `string`          | Accessible label applied to the MUI `Tabs` component.       |
+
+#### `VerticalTab`
+
+| Property     | Type        | Description                                       |
+| ------------ | ----------- | ------------------------------------------------- |
+| `displayName`| `string`    | Text rendered inside the MUI `Tab`.               |
+| `content`    | `ReactNode` | Content shown in the tab panel when selected.      |
+| `disabled?`  | `boolean`   | Disables the tab so it cannot be selected.          |
+
+`VerticalTabDisplay` uses `useWindowDimensions` to switch orientation automatically: vertical tabs on screens ≥ 600px, horizontal tabs below that breakpoint.
+
+```tsx
+import { VerticalTabDisplay } from '@mr-skribbls/react-mui-base-components';
+
+const tabs = [
+  { displayName: 'One', content: <p>Panel one</p> },
+  { displayName: 'Two', content: <p>Panel two</p> },
+];
+
+function App() {
+  return <VerticalTabDisplay tabs={tabs} ariaLabel='Demo' />;
 }
 ```
 
