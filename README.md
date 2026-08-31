@@ -91,6 +91,7 @@ function Root() {
 | `AddableGridList` | `GridList` wrapped in a fill-height layout with an add-item dialog slot.                         |
 | `ColorPickerButton` | A color swatch button that opens a picker dialog and reports changes.                              |
 | `Overlay`           | A transparent, full-screen layer that centers its content over the page.                        |
+| `FieldContainer`    | An MUI `Stack` wrapper for form fields with optional drag-and-drop handlers.                     |
 
 ### `ActiveAddress` props
 
@@ -246,6 +247,34 @@ function App() {
     <Overlay>
       <p>This is centered over the page.</p>
     </Overlay>
+  );
+}
+```
+
+### `FieldContainer` props
+
+| Prop            | Type                                           | Description                                                        |
+| --------------- | ---------------------------------------------- | ------------------------------------------------------------------ |
+| `children`      | `ReactNode`                                    | Content rendered inside the stack.                                 |
+| `direction?`    | `'column' \| 'row'`                            | Flex direction of the stack. Defaults to `'column'`.               |
+| `minWidth?`     | `number`                                       | Minimum width in pixels. Defaults to `0`.                          |
+| `spacing?`      | `number`                                       | Gap between children in MUI spacing units. Defaults to `1.5`.      |
+| `onDragOver?`   | `(event: DragEvent<HTMLElement>) => void`      | Forwarded to the underlying MUI `Stack`.                           |
+| `onDragEnter?`  | `(event: DragEvent<HTMLElement>) => void`      | Forwarded to the underlying MUI `Stack`.                           |
+| `onDragLeave?`  | `(event: DragEvent<HTMLElement>) => void`      | Forwarded to the underlying MUI `Stack`.                           |
+| `onDrop?`       | `(event: DragEvent<HTMLElement>) => void`      | Forwarded to the underlying MUI `Stack`.                           |
+
+`FieldContainer` is a thin wrapper around MUI `Stack` that adds sensible form-layout defaults (`direction: 'column'`, `spacing: 1.5`, `marginTop: '6px'`, `flexGrow: 1`). All drag-and-drop handlers are forwarded directly to the stack element, making it useful as a drop zone around form fields.
+
+```tsx
+import { FieldContainer, TextField } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <FieldContainer spacing={2}>
+      <TextField label="Name" />
+      <TextField label="Email" />
+    </FieldContainer>
   );
 }
 ```
