@@ -326,6 +326,7 @@ Where `V` and `D` are `number | string`, and options may be primitives (e.g. `st
 | `useDevice` | Detects the device's form factor and platform, returning `isMobile` and `isApple`. |
 | `useImducer` | React state built on `useReducer` with Immer support for `SET`, `UPDATE`, and `DRAFT` actions. |
 | `useColor` | Generates random hex colors via a `randomHex` helper. |
+| `useWindowDimensions` | Tracks the browser window's inner `width` and `height`, updating on resize. |
 
 ### `useDevice`
 
@@ -406,6 +407,25 @@ function App() {
   const [color, setColor] = useState(randomHex);
 
   return <button onClick={() => setColor(randomHex())}>{color}</button>;
+}
+```
+
+### `useWindowDimensions`
+
+| Return    | Type     | Description                                        |
+| --------- | -------- | -------------------------------------------------- |
+| `width`   | `number` | The browser window's inner width in pixels.         |
+| `height`  | `number` | The browser window's inner height in pixels.        |
+
+`useWindowDimensions` reads `window.innerWidth`/`innerHeight` on mount and re-renders whenever the window is resized.
+
+```tsx
+import { useWindowDimensions } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { width, height } = useWindowDimensions();
+
+  return <p>Window is {width}×{height}</p>;
 }
 ```
 
