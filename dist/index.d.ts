@@ -16,6 +16,8 @@ export { Overlay } from './components/Overlay';
 export type { OverlayProps } from './components/Overlay';
 export { FieldContainer } from './components/FieldContainer';
 export type { FieldContainerProps } from './components/FieldContainer';
+export { ResponsiveButton } from './components/ResponsiveButton';
+export type { ResponsiveButtonProps } from './components/ResponsiveButton';
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 export { useImducer, ActionType } from './hooks/useImducer';

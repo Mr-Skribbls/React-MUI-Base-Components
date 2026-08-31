@@ -1,0 +1,16 @@
+.mobile-button {
+  display: block;
+}
+
+.desktop-button {
+  display: none;
+}
+
+@media screen and (min-width: 640px) {
+  .mobile-button {
+    display: none;
+  }
+  .desktop-button {
+    display: block;
+  }
+}

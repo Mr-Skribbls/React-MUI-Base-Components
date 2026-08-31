@@ -92,6 +92,7 @@ function Root() {
 | `ColorPickerButton` | A color swatch button that opens a picker dialog and reports changes.                              |
 | `Overlay`           | A transparent, full-screen layer that centers its content over the page.                        |
 | `FieldContainer`    | An MUI `Stack` wrapper for form fields with optional drag-and-drop handlers.                     |
+| `ResponsiveButton`  | A button that shows full text on desktop and icon-only on mobile via CSS media queries.            |
 
 ### `ActiveAddress` props
 
@@ -275,6 +276,31 @@ function App() {
       <TextField label="Name" />
       <TextField label="Email" />
     </FieldContainer>
+  );
+}
+```
+
+### `ResponsiveButton` props
+
+| Prop       | Type                                                        | Description                                                  |
+| ---------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| `title?`   | `string`                                                    | Button label shown as text (desktop) and as the `title` attribute (mobile). |
+| `icon`     | `ReactNode`                                                 | Icon rendered inside both the `Button` and `IconButton`.      |
+| `onClick`  | `(event: MouseEvent<HTMLButtonElement>) => void`            | Click handler forwarded to both button variants.              |
+
+`ResponsiveButton` renders a MUI `Button` (with `startIcon` + label) on desktop and a MUI `IconButton` (icon only) on mobile, toggled via CSS media queries at `768px`. Both variants share the same `onClick` handler.
+
+```tsx
+import { MdAdd } from 'react-icons/md';
+import { ResponsiveButton } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <ResponsiveButton
+      title="Add item"
+      icon={<MdAdd />}
+      onClick={() => console.log('clicked')}
+    />
   );
 }
 ```
