@@ -95,6 +95,7 @@ function Root() {
 | `ResponsiveButton`  | A button that shows full text on desktop and icon-only on mobile via CSS media queries.            |
 | `HorizontalTabDisplay` | A horizontal tabbed panel powered by MUI `Tabs`.                                               |
 | `VerticalTabDisplay`  | A responsive tabbed panel: vertical on desktop, horizontal on mobile (< 600px).                  |
+| `IconMenu`            | A responsive button that opens a dropdown menu of actions.                                        |
 
 ### `ActiveAddress` props
 
@@ -486,6 +487,41 @@ const tabs = [
 
 function App() {
   return <VerticalTabDisplay tabs={tabs} ariaLabel='Demo' />;
+}
+```
+
+### `IconMenu` props
+
+| Prop        | Type                   | Description                                                   |
+| ----------- | ---------------------- | ------------------------------------------------------------- |
+| `title?`    | `string`               | Button label shown on desktop (passed to `ResponsiveButton`). |
+| `icon`      | `ReactNode`            | Icon rendered inside the `ResponsiveButton` trigger.          |
+| `menuItems` | `MenuItemDefinition[]` | Array of menu items to render in the dropdown.                 |
+
+#### `MenuItemDefinition`
+
+| Property     | Type       | Description                                        |
+| ------------ | ---------- | -------------------------------------------------- |
+| `displayName`| `string`   | Text rendered inside the MUI `MenuItem`.            |
+| `click`      | `() => void`| Callback invoked when the menu item is selected.  |
+
+`IconMenu` wraps `ResponsiveButton` and an MUI `Menu`. Clicking the button opens the menu; selecting an item calls its `click` handler and closes the menu.
+
+```tsx
+import { MdMoreVert } from 'react-icons/md';
+import { IconMenu } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <IconMenu
+      title="Actions"
+      icon={<MdMoreVert />}
+      menuItems={[
+        { displayName: 'Edit', click: () => console.log('edit') },
+        { displayName: 'Delete', click: () => console.log('delete') },
+      ]}
+    />
+  );
 }
 ```
 

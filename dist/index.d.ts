@@ -22,6 +22,8 @@ export { HorizontalTabDisplay } from './components/HorizontalTabDisplay';
 export type { HorizontalTabDisplayProps, HorizontalTab } from './components/HorizontalTabDisplay';
 export { VerticalTabDisplay } from './components/VerticalTabDisplay';
 export type { VerticalTabDisplayProps, VerticalTab } from './components/VerticalTabDisplay';
+export { IconMenu } from './components/IconMenu';
+export type { IconMenuProps, MenuItemDefinition } from './components/IconMenu';
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 export { useImducer, ActionType } from './hooks/useImducer';
