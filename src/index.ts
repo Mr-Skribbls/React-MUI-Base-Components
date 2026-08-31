@@ -33,6 +33,9 @@ export type { FieldContainerProps } from './components/FieldContainer';
 export { ResponsiveButton } from './components/ResponsiveButton';
 export type { ResponsiveButtonProps } from './components/ResponsiveButton';
 
+export { HorizontalTabDisplay } from './components/HorizontalTabDisplay';
+export type { HorizontalTabDisplayProps, HorizontalTab } from './components/HorizontalTabDisplay';
+
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 

@@ -93,6 +93,7 @@ function Root() {
 | `Overlay`           | A transparent, full-screen layer that centers its content over the page.                        |
 | `FieldContainer`    | An MUI `Stack` wrapper for form fields with optional drag-and-drop handlers.                     |
 | `ResponsiveButton`  | A button that shows full text on desktop and icon-only on mobile via CSS media queries.            |
+| `HorizontalTabDisplay` | A horizontal tabbed panel powered by MUI `Tabs`.                                               |
 
 ### `ActiveAddress` props
 
@@ -426,6 +427,34 @@ function App() {
   const { width, height } = useWindowDimensions();
 
   return <p>Window is {width}×{height}</p>;
+}
+```
+
+### `HorizontalTabDisplay` props
+
+| Prop        | Type             | Description                                                |
+| ----------- | ---------------- | ---------------------------------------------------------- |
+| `tabs`      | `HorizontalTab[]`| Array of tab objects to render (see `HorizontalTab` below). |
+| `ariaLabel?`| `string`         | Accessible label applied to the MUI `Tabs` component.      |
+
+#### `HorizontalTab`
+
+| Property     | Type        | Description                                       |
+| ------------ | ----------- | ------------------------------------------------- |
+| `displayName`| `string`    | Text rendered inside the MUI `Tab`.               |
+| `content`    | `ReactNode` | Content shown in the tab panel when selected.      |
+| `disabled?`  | `boolean`   | Disables the tab so it cannot be selected.          |
+
+```tsx
+import { HorizontalTabDisplay } from '@mr-skribbls/react-mui-base-components';
+
+const tabs = [
+  { displayName: 'One', content: <p>Panel one</p> },
+  { displayName: 'Two', content: <p>Panel two</p> },
+];
+
+function App() {
+  return <HorizontalTabDisplay tabs={tabs} ariaLabel='Demo' />;
 }
 ```
 
