@@ -4,6 +4,7 @@ import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -22,6 +23,7 @@ export default defineConfig({
       outDir: 'dist',
       insertTypesEntry: true,
     }),
+    cssInjectedByJsPlugin(),
   ],
   resolve: {
     alias: {

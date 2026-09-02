@@ -180,11 +180,7 @@ function App() {
 
 `AddableGridList` is a layout wrapper: it renders a `GridList` inside a fill-height flex column with the `addItemDialog` rendered beneath it. All grid behavior, props, and types are the same as `GridList`.
 
-Because `AddableGridList` ships a CSS module for its layout, consumers should import the emitted stylesheet once:
-
-```tsx
-import '@mr-skribbls/react-mui-base-components/react-mui-base-components.css';
-```
+`AddableGridList` ships a CSS module for its layout. These styles are bundled directly into the package's JavaScript and auto-injected when the component is imported, so no manual stylesheet import is required.
 
 ```tsx
 import { AddableGridList } from '@mr-skribbls/react-mui-base-components';
@@ -242,7 +238,7 @@ function App() {
 | `children?`  | `ReactNode`  | Content centered over the full viewport.                       |
 | `className?` | `string`     | Extra class name applied to the overlay root element.          |
 
-`Overlay` is a transparent `position: fixed` layer that covers the viewport and flex-centers its children, making it a base for implementing modal/dialog backdrops. It ships a CSS module, so consumers should import the emitted stylesheet once (same import as the `AddableGridList` note above).
+`Overlay` is a transparent `position: fixed` layer that covers the viewport and flex-centers its children, making it a base for implementing modal/dialog backdrops. Its styles are bundled into the package's JavaScript and auto-injected on import, so no manual stylesheet import is required.
 
 ```tsx
 import { Overlay } from '@mr-skribbls/react-mui-base-components';
