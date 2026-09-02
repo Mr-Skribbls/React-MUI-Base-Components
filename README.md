@@ -96,6 +96,7 @@ function Root() {
 | `HorizontalTabDisplay` | A horizontal tabbed panel powered by MUI `Tabs`.                                               |
 | `VerticalTabDisplay`  | A responsive tabbed panel: vertical on desktop, horizontal on mobile (< 600px).                  |
 | `IconMenu`            | A responsive button that opens a dropdown menu of actions.                                        |
+| `ImageDisplay`        | A container that renders and centrally crops an image from a URL or file.                         |
 
 ### `ActiveAddress` props
 
@@ -521,6 +522,33 @@ function App() {
         { displayName: 'Delete', click: () => console.log('delete') },
       ]}
     />
+  );
+}
+```
+
+### `ImageDisplay` props
+
+`ImageDisplay` accepts one of two mutually-exclusive sources. The base props below apply in both cases.
+
+| Prop         | Type            | Description                                                       |
+| ------------ | --------------- | ----------------------------------------------------------------- |
+| `imageUrl`   | `string`        | **(Either/or)** URL of the image to display.                       |
+| `imageFile`  | `File`          | **(Either/or)** A file whose object URL is created (and revoked on unmount). |
+| `alt`        | `string`        | Accessible alternative text for the image.                        |
+| `center`     | `ImageCenter`   | Focal point for cropping, as a `[x, y]` percentage tuple.         |
+| `className?` | `string`        | CSS class applied to the container.                               |
+| `style?`     | `CSSProperties` | Extra inline styles merged into the container.                    |
+
+> `ImageCenter` is a tuple of two integers `[0, 100]` (e.g. `[50, 50]`), used as the CSS `object-position` so oversized images are cropped around that focal point.
+
+```tsx
+import { ImageDisplay } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  return (
+    <div style={{ width: 400, height: 300 }}>
+      <ImageDisplay alt="Team photo" center={[50, 50]} imageUrl="/team.jpg" />
+    </div>
   );
 }
 ```

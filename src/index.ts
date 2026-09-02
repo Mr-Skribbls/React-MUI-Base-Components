@@ -42,6 +42,9 @@ export type { VerticalTabDisplayProps, VerticalTab } from './components/Vertical
 export { IconMenu } from './components/IconMenu';
 export type { IconMenuProps, MenuItemDefinition } from './components/IconMenu';
 
+export { ImageDisplay } from './components/ImageDisplay';
+export type { ImageDisplayProps, ImageCenter } from './components/ImageDisplay';
+
 export { useDevice } from './hooks/useDevice';
 export type { DeviceInfo } from './hooks/useDevice';
 
