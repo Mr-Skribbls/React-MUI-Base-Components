@@ -38,4 +38,28 @@ describe('ImageDisplay', () => {
 
     expect(revokeObjectURL).toHaveBeenCalledWith('blob:mock-url');
   });
+
+  it('prioritizes imageFile over imageUrl when both are provided', () => {
+    const createObjectURL = vi.fn(() => 'blob:mock-url');
+    vi.stubGlobal('URL', { ...URL, createObjectURL });
+
+    render(
+      <ImageDisplay
+        alt="A file"
+        center={[0, 0]}
+        imageUrl="https://example.com/wont-use-me.jpg"
+        imageFile={new File(['x'], 'image.png', { type: 'image/png' })}
+      />,
+    );
+
+    expect(createObjectURL).toHaveBeenCalledOnce();
+    expect((screen.getByAltText('A file') as HTMLImageElement).src).toBe('blob:mock-url');
+  });
+
+  it('does not render an image when neither imageUrl nor imageFile is provided', () => {
+    const { container } = render(<ImageDisplay alt="Nothing" center={[0, 0]} />);
+
+    expect(container.querySelector('img')).toBeNull();
+    expect(screen.queryByAltText('Nothing')).toBeNull();
+  });
 });

@@ -9,10 +9,9 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>> | T;
 type ValidPercentage = IntRange<0, 100>;
 export type ImageCenter = [ValidPercentage, ValidPercentage];
-export type ImageDisplayProps = ({
-    imageUrl: string;
-} & BaseProps) | ({
-    imageFile: File;
-} & BaseProps);
+export type ImageDisplayProps = BaseProps & {
+    imageUrl?: string | null;
+    imageFile?: File | null;
+};
 export declare const ImageDisplay: (props: ImageDisplayProps) => import("react").JSX.Element;
 export default ImageDisplay;

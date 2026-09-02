@@ -22,25 +22,26 @@ type IntRange<F extends number, T extends number> =
 type ValidPercentage = IntRange<0, 100>;
 export type ImageCenter = [ValidPercentage, ValidPercentage];
 
-export type ImageDisplayProps = 
-  | ({ imageUrl: string } & BaseProps)
-  | ({ imageFile: File } & BaseProps);
+export type ImageDisplayProps = BaseProps & {
+  imageUrl?: string | null;
+  imageFile?: File | null;
+};
 
 export const ImageDisplay = (props: ImageDisplayProps) => {
-  const { className, style } = props;
+  const { className, style, imageUrl, imageFile } = props;
 
-  const { imageUrl, revokeUrl } = useMemo(() => {
-    if ('imageUrl' in props) {
-      return { imageUrl: props.imageUrl, revokeUrl: null };
+  const { sourceUrl, revokeUrl } = useMemo(() => {
+    if (imageFile) {
+      return { sourceUrl: URL.createObjectURL(imageFile), revokeUrl: imageFile };
     }
-    return { imageUrl: URL.createObjectURL(props.imageFile), revokeUrl: props.imageFile };
-  }, [props]);
+    return { sourceUrl: imageUrl, revokeUrl: null };
+  }, [imageFile, imageUrl]);
 
   useEffect(() => () => {
     if (revokeUrl) {
-      URL.revokeObjectURL(imageUrl);
+      URL.revokeObjectURL(sourceUrl);
     }
-  }, [imageUrl, revokeUrl]);
+  }, [sourceUrl, revokeUrl]);
 
   const objectPosition = `${props.center[0]}% ${props.center[1]}%`;
 
@@ -55,9 +56,9 @@ export const ImageDisplay = (props: ImageDisplayProps) => {
         ...style,
       }}
     >
-      {imageUrl ? (
+      {sourceUrl ? (
         <img
-          src={imageUrl}
+          src={sourceUrl}
           alt={props.alt}
           style={{
             width: '100%',
