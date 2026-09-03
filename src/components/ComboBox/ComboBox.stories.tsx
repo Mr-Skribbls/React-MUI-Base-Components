@@ -47,7 +47,7 @@ export const ObjectOptions: Story = {
     return (
       <ComboBox<Country>
         options={countries}
-        displayProp="Name"
+        displayProp={(c) => c.Name}
         label="Country"
         value={value}
         onChange={(v) => setValue(v as Country | Country[] | null)}
@@ -65,7 +65,7 @@ export const Multiple: Story = {
       <ComboBox<Country>
         multiple
         options={countries}
-        displayProp="Name"
+        displayProp={(c) => c.Name}
         label="Countries"
         value={value}
         onChange={(v) => setValue(v as Country | Country[] | null)}

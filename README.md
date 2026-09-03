@@ -327,7 +327,7 @@ Where `V` and `D` are `number | string`, and options may be primitives (e.g. `st
 | `options`        | `T[]`                                                        | The list of options. Can be primitives (`string[]`) or objects.                                   |
 | `value`          | `T \| T[] \| null`                                           | The currently selected option(s). Controlled by the consumer.                                     |
 | `onChange`       | `(value: T \| T[] \| null) => void`                           | Called with the full selected option(s). Manual free-text entries are reported as `string` values. |
-| `displayProp?`   | `SpecificTypeKeys<T, string>`                                | The object key used to display each option's text. Omit to display primitives directly.            |
+| `displayProp?`   | `(option: T) => string`                                       | Function returning the display text for a given option. Omit to display primitives directly.      |
 | `mask?`          | `ComboBoxMask`                                               | A component used as the input's `inputComponent` to apply an input mask (e.g. `react-input-mask`). |
 | `maskInputProps?`| `Record<string, unknown>`                                    | Props forwarded to the mask component (e.g. `mask` pattern).                                       |
 | `multiple?`      | `boolean`                                                    | When `true`, allows selecting multiple options. Typed entries are added as selected string options.|

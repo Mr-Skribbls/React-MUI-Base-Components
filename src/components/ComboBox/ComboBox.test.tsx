@@ -33,7 +33,7 @@ describe('ComboBox', () => {
     render(
       <ComboBox
         options={options}
-        displayProp="name"
+        displayProp={(o) => o.name}
         value={null}
         onChange={onChange}
       />,

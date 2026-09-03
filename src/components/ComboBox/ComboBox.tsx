@@ -4,10 +4,6 @@ import _ from 'lodash';
 import type { InputBaseComponentProps } from '@mui/material';
 import { Autocomplete, TextField } from '@mui/material';
 
-type SpecificTypeKeys<T, V extends string> = {
-  [K in keyof T]: T[K] extends V ? K : never;
-}[keyof T];
-
 export type ComboBoxMask = ElementType<
   InputBaseComponentProps,
   keyof JSX.IntrinsicElements
@@ -19,7 +15,7 @@ export interface ComboBoxProps<T> {
   options: T[];
   value: ComboBoxValue<T>;
   onChange: (value: ComboBoxValue<T>) => void;
-  displayProp?: SpecificTypeKeys<T, string>;
+  displayProp?: (option: T) => string;
   mask?: ComboBoxMask;
   maskInputProps?: Record<string, unknown>;
   multiple?: boolean;
@@ -43,10 +39,7 @@ export const ComboBox = <T,>({
   const getOptionLabel = useCallback(
     (option: string | T) => {
       if (_.isString(option)) return option;
-      if (!_.isNil(displayProp)) {
-        const displayValue = option[displayProp];
-        return _.isString(displayValue) ? displayValue : String(option);
-      }
+      if (!_.isNil(displayProp)) return displayProp(option);
       return String(option);
     },
     [displayProp],
