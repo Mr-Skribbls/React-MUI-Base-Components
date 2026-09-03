@@ -84,6 +84,7 @@ function Root() {
 | Component      | Description                                                                                    |
 | -------------- | ---------------------------------------------------------------------------------------------- |
 | `ButtonSelect` | MUI `ToggleButtonGroup`-based single-select rendering a set of options, with typed value/display key support. |
+| `ComboBox` | MUI `Autocomplete`-based field that lets users pick from a list of options or type their own, in single or multi-select mode, with optional input masking. |
 | `ActiveAddress`| Renders an address with a map button that deep-links to the Google Maps app and falls back to the web in a browser. |
 | `ActivePhone`  | Renders a phone number with call and message buttons that are shown on mobile devices only.    |
 | `ActiveEmail`  | Renders an email address with a button that opens a `mailto:` link in a new tab.               |
@@ -319,9 +320,46 @@ function App() {
 
 Where `V` and `D` are `number | string`, and options may be primitives (e.g. `string[]`) or objects (using `valueProp`/`displayProp`).
 
+### `ComboBox` props
+
+| Prop             | Type                                                         | Description                                                                                       |
+| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `options`        | `T[]`                                                        | The list of options. Can be primitives (`string[]`) or objects.                                   |
+| `value`          | `T \| T[] \| null`                                           | The currently selected option(s). Controlled by the consumer.                                     |
+| `onChange`       | `(value: T \| T[] \| null) => void`                           | Called with the full selected option(s). Manual free-text entries are reported as `string` values. |
+| `displayProp?`   | `SpecificTypeKeys<T, string>`                                | The object key used to display each option's text. Omit to display primitives directly.            |
+| `mask?`          | `ComboBoxMask`                                               | A component used as the input's `inputComponent` to apply an input mask (e.g. `react-input-mask`). |
+| `maskInputProps?`| `Record<string, unknown>`                                    | Props forwarded to the mask component (e.g. `mask` pattern).                                       |
+| `multiple?`      | `boolean`                                                    | When `true`, allows selecting multiple options. Typed entries are added as selected string options.|
+| `label?`         | `string`                                                     | Visible label for the field.                                                                       |
+| `placeholder?`   | `string`                                                     | Placeholder shown when empty.                                                                      |
+| `errors?`        | `string`                                                     | When provided, displays the value as helper text and marks the field as errored.                   |
+
+`ComboBox` renders as MUI `Autocomplete` with `freeSolo` enabled so users can either pick from `options` or type their own value. In multi-select mode, a manually typed value is added to the selection as a plain `string`.
+
+```tsx
+import { ComboBox } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const [value, setValue] = useState<string[] | null>([]);
+  return (
+    <ComboBox
+      multiple
+      options={['React', 'Vue', 'Svelte']}
+      value={value}
+      onChange={setValue}
+      label="Frameworks"
+      placeholder="Select or add a framework"
+    />
+  );
+}
+```
+
+
+
 ## Hooks
 
-| Hook        | Description                                                                     |
+| Hook        | Description         |
 | ----------- | -------------------------------------------------------------------------------- |
 | `useDevice` | Detects the device's form factor and platform, returning `isMobile` and `isApple`. |
 | `useImducer` | React state built on `useReducer` with Immer support for `SET`, `UPDATE`, and `DRAFT` actions. |
