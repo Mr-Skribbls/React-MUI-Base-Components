@@ -1,18 +1,24 @@
-import { ElementType, JSX } from 'react';
 import { InputBaseComponentProps } from '@mui/material';
-export type ComboBoxMask = ElementType<InputBaseComponentProps, keyof JSX.IntrinsicElements>;
-export type ComboBoxValue<T> = (T | string) | (T | string)[] | null;
-export interface ComboBoxProps<T> {
-    options: T[];
-    value: ComboBoxValue<T>;
-    onChange: (value: ComboBoxValue<T>) => void;
-    displayProp?: (option: T) => string;
-    mask?: ComboBoxMask;
-    maskInputProps?: Record<string, unknown>;
-    multiple?: boolean;
+type BaseProps = {
     label?: string;
     placeholder?: string;
+    disabled?: boolean;
+    mask?: React.ElementType<InputBaseComponentProps, keyof React.JSX.IntrinsicElements>;
     errors?: string;
-}
-export declare const ComboBox: <T>({ options, value, onChange, displayProp, mask, maskInputProps, multiple, label, placeholder, errors, }: ComboBoxProps<T>) => JSX.Element;
+};
+type StringComboBoxProps = BaseProps & {
+    items: string[];
+    multiple?: boolean;
+    value?: string | string[];
+    onChange: (value: string | string[]) => void;
+};
+type ObjectComboBoxProps<T extends Record<string, unknown>, K extends keyof T> = BaseProps & {
+    items: T[];
+    multiple?: boolean;
+    value?: T[K] | T[K][] | string | string[];
+    onChange: (value: T[K] | T[K][] | string | string[]) => void;
+    getOptionLabel: (option: T) => string;
+    valueProperty: K;
+};
+declare function ComboBox<T extends Record<string, unknown>, K extends keyof T>(props: StringComboBoxProps | ObjectComboBoxProps<T, K>): React.ReactElement;
 export default ComboBox;

@@ -5,24 +5,44 @@ import { describe, expect, it, vi } from 'vitest';
 import ComboBox from './ComboBox';
 
 describe('ComboBox', () => {
-  it('renders label, placeholder and error helper text', () => {
+  it('renders label and placeholder', () => {
     render(
       <ComboBox
-        options={['One', 'Two']}
-        value={null}
+        items={['One', 'Two']}
+        value=""
         onChange={vi.fn()}
         label="Pick"
         placeholder="Pick one"
-        errors="Something went wrong"
       />,
     );
 
     expect(screen.getByLabelText('Pick')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Pick one')).toBeInTheDocument();
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
   });
 
-  it('calls onChange with the selected option', async () => {
+  it('calls onChange with the selected string value', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+
+    render(
+      <ComboBox
+        items={['Alpha', 'Beta']}
+        value=""
+        onChange={onChange}
+        label="Choice"
+      />,
+    );
+
+    const input = screen.getByRole('combobox');
+    await user.click(input);
+    await user.click(await screen.findByRole('option', { name: 'Beta' }));
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith('Beta');
+    });
+  });
+
+  it('calls onChange with the value property for object options', async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     const options = [
@@ -32,10 +52,12 @@ describe('ComboBox', () => {
 
     render(
       <ComboBox
-        options={options}
-        displayProp={(o) => o.name}
-        value={null}
+        items={options}
+        getOptionLabel={(o) => o.name}
+        valueProperty="id"
+        value={undefined}
         onChange={onChange}
+        label="Item"
       />,
     );
 
@@ -44,9 +66,21 @@ describe('ComboBox', () => {
     await user.click(await screen.findByRole('option', { name: 'Second' }));
 
     await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({ id: 2, name: 'Second' }),
-      );
+      expect(onChange).toHaveBeenCalledWith(2);
     });
+  });
+
+  it('disables the input when disabled is true', () => {
+    render(
+      <ComboBox
+        items={['One', 'Two']}
+        value=""
+        onChange={vi.fn()}
+        disabled
+        label="Pick"
+      />,
+    );
+
+    expect(screen.getByRole('combobox')).toBeDisabled();
   });
 });

@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { ComboBox } from './ComboBox';
+import ComboBox from './ComboBox';
 
 interface Country {
   Code: string;
   Name: string;
   Phone: number;
+  [key: string]: unknown;
 }
 
 const meta: Meta<typeof ComboBox> = {
@@ -22,14 +23,14 @@ const simpleOptions = ['New York', 'Chicago', 'Los Angeles'];
 
 export const SimpleStrings: Story = {
   render: () => {
-    const [value, setValue] = useState<string | string[] | null>(null);
+    const [value, setValue] = useState<string>('');
     return (
-      <ComboBox<string>
-        options={simpleOptions}
+      <ComboBox
+        items={simpleOptions}
         label="City"
         placeholder="Select or type a city"
         value={value}
-        onChange={(v) => setValue(v as string | string[] | null)}
+        onChange={(v: string | string[]) => setValue(typeof v === 'string' ? v : v[0] ?? '')}
       />
     );
   },
@@ -43,14 +44,15 @@ const countries: Country[] = [
 
 export const ObjectOptions: Story = {
   render: () => {
-    const [value, setValue] = useState<Country | Country[] | null>(null);
+    const [value, setValue] = useState<string>('');
     return (
-      <ComboBox<Country>
-        options={countries}
-        displayProp={(c) => c.Name}
+      <ComboBox
+        items={countries}
+        getOptionLabel={(c) => c.Name}
+        valueProperty="Code"
         label="Country"
         value={value}
-        onChange={(v) => setValue(v as Country | Country[] | null)}
+        onChange={(v: string | string[]) => setValue(typeof v === 'string' ? v : '')}
       />
     );
   },
@@ -58,32 +60,33 @@ export const ObjectOptions: Story = {
 
 export const Multiple: Story = {
   render: () => {
-    const [value, setValue] = useState<Country | Country[] | null>(
-      countries.slice(0, 1),
-    );
+    const [value, setValue] = useState<string[]>(['US']);
     return (
-      <ComboBox<Country>
+      <ComboBox
         multiple
-        options={countries}
-        displayProp={(c) => c.Name}
+        items={countries}
+        getOptionLabel={(c) => c.Name}
+        valueProperty="Code"
         label="Countries"
         value={value}
-        onChange={(v) => setValue(v as Country | Country[] | null)}
+        onChange={(v: string | string[]) => setValue(Array.isArray(v) ? v : [])}
       />
     );
   },
 };
 
-export const WithError: Story = {
+export const Disabled: Story = {
   render: () => {
-    const [value, setValue] = useState<string | string[] | null>(null);
+    const [value] = useState<string>('US');
     return (
-      <ComboBox<string>
-        options={simpleOptions}
-        label="City"
-        errors="A city is required."
+      <ComboBox
+        items={countries}
+        getOptionLabel={(c) => c.Name}
+        valueProperty="Code"
+        label="Country"
+        disabled
         value={value}
-        onChange={(v) => setValue(v as string | string[] | null)}
+        onChange={() => {}}
       />
     );
   },

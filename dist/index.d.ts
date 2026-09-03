@@ -1,7 +1,6 @@
 export { ButtonSelect } from './components/ButtonSelect';
 export type { ButtonSelectProps } from './components/ButtonSelect';
-export { ComboBox } from './components/ComboBox';
-export type { ComboBoxProps, ComboBoxMask } from './components/ComboBox';
+export { default as ComboBox } from './components/ComboBox';
 export { ActiveAddress } from './components/ActiveAddress';
 export type { ActiveAddressProps } from './components/ActiveAddress';
 export { ActivePhone } from './components/ActivePhone';
