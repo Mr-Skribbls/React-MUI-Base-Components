@@ -38,4 +38,5 @@ export { useConversions, weightUnits } from './hooks/useConversions';
 export type { WeightUnit } from './hooks/useConversions';
 export { useDateFormat } from './hooks/useDateFormat';
 export { useDebounce } from './hooks/useDebounce';
+export { useTempId } from './hooks/useTempId';
 export { lightTheme, darkTheme } from './theme';

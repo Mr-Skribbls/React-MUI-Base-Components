@@ -367,6 +367,7 @@ function App() {
 | `useConversions`      | Converts weight values between `g`, `kg`, `oz`, and `lbs`.                       |
 | `useDateFormat`       | Formats dates via `Intl.DateTimeFormat` or a simple token template.              |
 | `useDebounce`         | Debounces an async action so only the last call within `delay` executes.         |
+| `useTempId`           | Generates negative temporary IDs that avoid collisions with existing IDs.        |
 
 ### `useDevice`
 
@@ -528,6 +529,29 @@ function App() {
   const { debounce } = useDebounce((value) => submitSearch(value), 500);
 
   return <input onChange={(e) => debounce(e.target.value)} />;
+}
+```
+
+### `useTempId`
+
+`useTempId` creates generators that produce negative temporary IDs (starting at `-1` and counting down), skipping any values already present in the supplied `preexistingIds`.
+
+| Return           | Type                                     | Description                                                      |
+| ---------------- | ---------------------------------------- | ---------------------------------------------------------------- |
+| `getIdGenerator` | `(preexistingIds: number[]) => { next }` | Returns a generator whose `next()` yields the next free negative ID. |
+
+```tsx
+import { useTempId } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { getIdGenerator } = useTempId();
+
+  const handleAdd = () => {
+    const { next } = getIdGenerator([-1, -4]);
+    const id = next(); // -2
+  };
+
+  return <button onClick={handleAdd}>Add</button>;
 }
 ```
 

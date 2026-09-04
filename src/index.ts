@@ -65,4 +65,6 @@ export { useDateFormat } from './hooks/useDateFormat';
 
 export { useDebounce } from './hooks/useDebounce';
 
+export { useTempId } from './hooks/useTempId';
+
 export { lightTheme, darkTheme } from './theme';
