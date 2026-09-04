@@ -366,6 +366,7 @@ function App() {
 | `useWindowDimensions` | Tracks the browser window's inner `width` and `height`, updating on resize. |
 | `useConversions`      | Converts weight values between `g`, `kg`, `oz`, and `lbs`.                       |
 | `useDateFormat`       | Formats dates via `Intl.DateTimeFormat` or a simple token template.              |
+| `useDebounce`         | Debounces an async action so only the last call within `delay` executes.         |
 
 ### `useDevice`
 
@@ -509,6 +510,24 @@ function App() {
       <p>{simpleFormatDate(new Date(), 'yyyy/MM/dd')}</p>
     </>
   );
+}
+```
+
+### `useDebounce`
+
+`useDebounce` debounces an action so only the last invocation within `delay` milliseconds actually runs. Returns a `debounce` function that takes an optional value and resolves with the action's result.
+
+| Return     | Type                              | Description                                                     |
+| ---------- | --------------------------------- | --------------------------------------------------------------- |
+| `debounce` | `<T, U>(value?: T) => Promise<U>` | Resets the timer and schedules `action(value)` after `delay`.   |
+
+```tsx
+import { useDebounce } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { debounce } = useDebounce((value) => submitSearch(value), 500);
+
+  return <input onChange={(e) => debounce(e.target.value)} />;
 }
 ```
 

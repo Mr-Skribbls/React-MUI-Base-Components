@@ -63,4 +63,6 @@ export type { WeightUnit } from './hooks/useConversions';
 
 export { useDateFormat } from './hooks/useDateFormat';
 
+export { useDebounce } from './hooks/useDebounce';
+
 export { lightTheme, darkTheme } from './theme';
