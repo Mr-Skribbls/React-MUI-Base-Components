@@ -67,4 +67,6 @@ export { useDebounce } from './hooks/useDebounce';
 
 export { useTempId } from './hooks/useTempId';
 
+export { useFieldValidationMessage } from './hooks/useFieldValidationMessage';
+
 export { lightTheme, darkTheme } from './theme';

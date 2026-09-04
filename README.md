@@ -368,6 +368,7 @@ function App() {
 | `useDateFormat`       | Formats dates via `Intl.DateTimeFormat` or a simple token template.              |
 | `useDebounce`         | Debounces an async action so only the last call within `delay` executes.         |
 | `useTempId`           | Generates negative temporary IDs that avoid collisions with existing IDs.        |
+| `useFieldValidationMessage` | Spreads a `helperText` prop onto a `TextField` when validation fails.       |
 
 ### `useDevice`
 
@@ -552,6 +553,30 @@ function App() {
   };
 
   return <button onClick={handleAdd}>Add</button>;
+}
+```
+
+### `useFieldValidationMessage`
+
+`useFieldValidationMessage` accepts a field value, a validation predicate, and an error message. It returns a `validationAttrs` object to spread onto an MUI `TextField`: it contains `helperText` when validation fails, and is empty otherwise.
+
+| Param       | Type                              | Description                                            |
+| ----------- | --------------------------------- | ------------------------------------------------------ |
+| `fieldValue`| `unknown`                         | The current value to validate.                         |
+| `validation`| `(fieldValue: unknown) => boolean`| Returns `true` when the field is valid.                |
+| `message`   | `string`                          | Helper text shown while the field is invalid.           |
+
+| Return            | Type            | Description                                    |
+| ----------------- | --------------- | ---------------------------------------------- |
+| `validationAttrs` | `TextFieldProps`| Props to spread onto `TextField` (includes `helperText` when invalid). |
+
+```tsx
+import { useFieldValidationMessage } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { validationAttrs } = useFieldValidationMessage(value, (v) => v.length > 0, 'Required.');
+
+  return <TextField {...validationAttrs} value={value} />;
 }
 ```
 

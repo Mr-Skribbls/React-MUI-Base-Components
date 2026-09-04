@@ -39,4 +39,5 @@ export type { WeightUnit } from './hooks/useConversions';
 export { useDateFormat } from './hooks/useDateFormat';
 export { useDebounce } from './hooks/useDebounce';
 export { useTempId } from './hooks/useTempId';
+export { useFieldValidationMessage } from './hooks/useFieldValidationMessage';
 export { lightTheme, darkTheme } from './theme';
