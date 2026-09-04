@@ -8,3 +8,7 @@ export const isPrimitive = (value: unknown): boolean => {
     || isNil(value)
     || isSymbol(value);
 };
+
+export const getTypeKeys = <T extends object>(obj: T): (keyof T)[] => {
+  return Object.keys(obj) as (keyof T)[];
+};

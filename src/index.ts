@@ -58,4 +58,7 @@ export { useColor } from './hooks/useColor';
 export { useWindowDimensions } from './hooks/useWindowDimensions';
 export type { WindowDimensions } from './hooks/useWindowDimensions';
 
+export { useConversions, weightUnits } from './hooks/useConversions';
+export type { WeightUnit } from './hooks/useConversions';
+
 export { lightTheme, darkTheme } from './theme';

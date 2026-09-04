@@ -364,6 +364,7 @@ function App() {
 | `useImducer` | React state built on `useReducer` with Immer support for `SET`, `UPDATE`, and `DRAFT` actions. |
 | `useColor` | Generates random hex colors via a `randomHex` helper. |
 | `useWindowDimensions` | Tracks the browser window's inner `width` and `height`, updating on resize. |
+| `useConversions`      | Converts weight values between `g`, `kg`, `oz`, and `lbs`.                       |
 
 ### `useDevice`
 
@@ -463,6 +464,26 @@ function App() {
   const { width, height } = useWindowDimensions();
 
   return <p>Window is {width}×{height}</p>;
+}
+```
+
+### `useConversions`
+
+`useConversions` converts weight values between the supported `WeightUnit`s: `g`, `kg`, `oz`, and `lbs`.
+
+| Return           | Type                                              | Description                              |
+| ---------------- | ------------------------------------------------- | ---------------------------------------- |
+| `convertWeight`  | `(value: number, from: WeightUnit, to: WeightUnit) => number` | Converts `value` from `from` to `to`. |
+
+The available units are also exported separately as `weightUnits` (a typed `WeightUnit[]`).
+
+```tsx
+import { useConversions } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { convertWeight } = useConversions();
+
+  return <p>{convertWeight(1000, 'g', 'kg')} kg</p>;
 }
 ```
 
