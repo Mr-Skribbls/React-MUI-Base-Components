@@ -365,6 +365,7 @@ function App() {
 | `useColor` | Generates random hex colors via a `randomHex` helper. |
 | `useWindowDimensions` | Tracks the browser window's inner `width` and `height`, updating on resize. |
 | `useConversions`      | Converts weight values between `g`, `kg`, `oz`, and `lbs`.                       |
+| `useDateFormat`       | Formats dates via `Intl.DateTimeFormat` or a simple token template.              |
 
 ### `useDevice`
 
@@ -484,6 +485,30 @@ function App() {
   const { convertWeight } = useConversions();
 
   return <p>{convertWeight(1000, 'g', 'kg')} kg</p>;
+}
+```
+
+### `useDateFormat`
+
+`useDateFormat` returns helpers for formatting dates. It accepts an optional `Intl.DateTimeFormatOptions` object used as the default format for `formatDate`.
+
+| Return             | Type                                                | Description                                     |
+| ------------------ | --------------------------------------------------- | ----------------------------------------------- |
+| `formatDate`       | `(date, formatOptions?) => string`                  | Formats via `Intl.DateTimeFormat` (`en-US`, default `year`/`month`/`day`). |
+| `simpleFormatDate` | `(date, template?) => string`                       | Replaces `yyyy`, `MM`, `dd`, `HH`, `mm` tokens in `template` (default `yyyy-MM-dd HH:mm`). |
+
+```tsx
+import { useDateFormat } from '@mr-skribbls/react-mui-base-components';
+
+function App() {
+  const { formatDate, simpleFormatDate } = useDateFormat();
+
+  return (
+    <>
+      <p>{formatDate(new Date())}</p>
+      <p>{simpleFormatDate(new Date(), 'yyyy/MM/dd')}</p>
+    </>
+  );
 }
 ```
 
