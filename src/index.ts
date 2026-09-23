@@ -12,6 +12,9 @@ export type { ActivePhoneProps } from './components/ActivePhone';
 export { ActiveEmail } from './components/ActiveEmail';
 export type { ActiveEmailProps } from './components/ActiveEmail';
 
+export { ActiveWebsite } from './components/ActiveWebsite';
+export type { ActiveWebsiteProps } from './components/ActiveWebsite';
+
 export { GridList } from './components/GridList';
 export type {
   GridListProps,
