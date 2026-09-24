@@ -34,7 +34,7 @@ export const VerticalTabDisplay = ({
   }
 
   return (
-    <Stack direction={screenWidth < 600 ? 'column': 'row'} sx={{ minHeight: 0}}>
+    <Stack direction={screenWidth < 600 ? 'column': 'row'} sx={{ minHeight: 0, flexGrow: 1 }}>
       <Tabs
         orientation={screenWidth < 600 ? 'horizontal' : 'vertical'}
         variant='scrollable'
@@ -46,8 +46,7 @@ export const VerticalTabDisplay = ({
         )) }
       </Tabs>
       <Stack
-        sx={{ flexGrow: 1, minWidth: '150px' }}
-        height={'100%'}
+        sx={{ flexGrow: 1, minWidth: '150px', minHeight: 0 }}
         paddingTop={1}
         paddingLeft={1}
         overflow='auto'>

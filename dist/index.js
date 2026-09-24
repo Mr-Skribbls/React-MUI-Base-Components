@@ -706,7 +706,7 @@ const k = {
       type: x.SET
     });
   };
-  return /* @__PURE__ */ v(y, { direction: s < 600 ? "column" : "row", sx: { minHeight: 0 }, children: [
+  return /* @__PURE__ */ v(y, { direction: s < 600 ? "column" : "row", sx: { minHeight: 0, flexGrow: 1 }, children: [
     /* @__PURE__ */ o(
       q,
       {
@@ -721,8 +721,7 @@ const k = {
     /* @__PURE__ */ o(
       y,
       {
-        sx: { flexGrow: 1, minWidth: "150px" },
-        height: "100%",
+        sx: { flexGrow: 1, minWidth: "150px", minHeight: 0 },
         paddingTop: 1,
         paddingLeft: 1,
         overflow: "auto",
