@@ -42,6 +42,10 @@ export interface GridConfiguration<T extends GridValidRowModel> {
         multiSelect?: boolean;
         model?: GridRowSelectionModel;
     };
+    pagination?: {
+        autoPageSize?: boolean;
+        initialPageSize?: number;
+    };
     getRowHeight?: ((params: GridRowHeightParams) => GridRowHeightReturnValue) | undefined;
 }
 export interface GridEvents {

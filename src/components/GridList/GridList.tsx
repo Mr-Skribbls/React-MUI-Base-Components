@@ -47,6 +47,10 @@ export interface GridConfiguration<T extends GridValidRowModel> {
     multiSelect?: boolean;
     model?: GridRowSelectionModel;
   };
+  pagination?: {
+    autoPageSize?: boolean;
+    initialPageSize?: number;
+  };
   getRowHeight?: ((params: GridRowHeightParams) => GridRowHeightReturnValue) | undefined;
 }
 
@@ -176,7 +180,11 @@ export function GridList<T extends GridData>({
   return (
     <DataGrid
       getRowHeight={configuration?.getRowHeight}
-      autoPageSize
+      autoPageSize={configuration?.pagination?.autoPageSize ?? true}
+      initialState={configuration?.pagination?.autoPageSize === false
+        && configuration.pagination.initialPageSize !== undefined
+        ? { pagination: { paginationModel: { pageSize: configuration.pagination.initialPageSize } } }
+        : undefined}
       disableColumnFilter
       checkboxSelection={configuration?.selection?.multiSelect}
       disableMultipleRowSelection={!configuration?.selection?.multiSelect}
