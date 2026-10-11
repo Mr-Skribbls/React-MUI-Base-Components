@@ -70,6 +70,90 @@ describe('ComboBox', () => {
     });
   });
 
+  it('calls onInputChange with the typed text as the user types', async () => {
+    const user = userEvent.setup();
+    const onInputChange = vi.fn();
+
+    render(
+      <ComboBox
+        items={['Alpha', 'Beta']}
+        value=""
+        onChange={vi.fn()}
+        onInputChange={onInputChange}
+        label="Choice"
+      />,
+    );
+
+    await user.type(screen.getByRole('combobox'), 'Alph');
+
+    await waitFor(() => {
+      expect(onInputChange).toHaveBeenCalledWith('Alph');
+    });
+  });
+
+  it('calls onInputChange with the typed text for object options', async () => {
+    const user = userEvent.setup();
+    const onInputChange = vi.fn();
+    const options = [
+      { id: 1, name: 'First' },
+      { id: 2, name: 'Second' },
+    ];
+
+    render(
+      <ComboBox
+        items={options}
+        getOptionLabel={(o) => o.name}
+        valueProperty="id"
+        value={undefined}
+        onChange={vi.fn()}
+        onInputChange={onInputChange}
+        label="Item"
+      />,
+    );
+
+    await user.type(screen.getByRole('combobox'), 'Seco');
+
+    await waitFor(() => {
+      expect(onInputChange).toHaveBeenCalledWith('Seco');
+    });
+  });
+
+  it('calls onInputChange with an empty string when the input is cleared', async () => {
+    const user = userEvent.setup();
+    const onInputChange = vi.fn();
+
+    render(
+      <ComboBox
+        items={['Alpha', 'Beta']}
+        value=""
+        onChange={vi.fn()}
+        onInputChange={onInputChange}
+        label="Choice"
+      />,
+    );
+
+    const input = screen.getByRole('combobox');
+    await user.type(input, 'Alpha');
+    await user.clear(input);
+
+    await waitFor(() => {
+      expect(onInputChange).toHaveBeenCalledWith('');
+    });
+  });
+
+  it('does not require onChange when onInputChange is provided', () => {
+    render(
+      <ComboBox
+        items={['Alpha', 'Beta']}
+        value=""
+        onInputChange={vi.fn()}
+        label="Choice"
+      />,
+    );
+
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
+  });
+
   it('disables the input when disabled is true', () => {
     render(
       <ComboBox

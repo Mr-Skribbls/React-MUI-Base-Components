@@ -20,7 +20,8 @@ type StringComboBoxProps = BaseProps & {
   items: string[];
   multiple?: boolean;
   value?: string | string[];
-  onChange: (value: string | string[]) => void;
+  onChange?: (value: string | string[]) => void;
+  onInputChange?: (value: string) => void;
 };
 
 type ObjectComboBoxProps<
@@ -30,7 +31,8 @@ type ObjectComboBoxProps<
   items: T[];
   multiple?: boolean;
   value?: T[K] | T[K][] | string | string[];
-  onChange: (value: T[K] | T[K][] | string | string[]) => void;
+  onChange?: (value: T[K] | T[K][] | string | string[]) => void;
+  onInputChange?: (value: string) => void;
   getOptionLabel: (option: T) => string;
   valueProperty: K;
 };
@@ -136,6 +138,9 @@ function ComboBox<
         }}
         value={resolvedValue as never}
         onChange={(_, newValue) => {
+          if(isNil(props.onChange)) {
+            return;
+          }
           if (multiple) {
             const values = Array.isArray(newValue)
               ? newValue.map((item) => {
@@ -167,6 +172,12 @@ function ComboBox<
 
           props.onChange(newValue[props.valueProperty] as T[K]);
         }}
+        onInputChange={(_, value) => {
+          if(isNil(props.onInputChange)) {
+            return;
+          }
+          props.onInputChange(value);
+        }}
         renderInput={(params) => (
           <TextField
             {...constructFieldParams(params)}
@@ -184,6 +195,9 @@ function ComboBox<
       options={props.items}
       value={multiple ? (Array.isArray(props.value) ? props.value : []) : props.value ?? ''}
       onChange={(_, newValue) => {
+        if(isNil(props.onChange)) {
+          return;
+        }
         if (multiple) {
           props.onChange(
             Array.isArray(newValue)
@@ -198,6 +212,12 @@ function ComboBox<
             ? newValue
             : '',
         );
+      }}
+      onInputChange={(_, value) => {
+        if(isNil(props.onInputChange)) {
+          return;
+        }
+        props.onInputChange(value);
       }}
       renderInput={(params) => (
         <TextField

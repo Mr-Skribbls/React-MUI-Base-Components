@@ -10,13 +10,15 @@ type StringComboBoxProps = BaseProps & {
     items: string[];
     multiple?: boolean;
     value?: string | string[];
-    onChange: (value: string | string[]) => void;
+    onChange?: (value: string | string[]) => void;
+    onInputChange?: (value: string) => void;
 };
 type ObjectComboBoxProps<T extends Record<string, unknown>, K extends keyof T> = BaseProps & {
     items: T[];
     multiple?: boolean;
     value?: T[K] | T[K][] | string | string[];
-    onChange: (value: T[K] | T[K][] | string | string[]) => void;
+    onChange?: (value: T[K] | T[K][] | string | string[]) => void;
+    onInputChange?: (value: string) => void;
     getOptionLabel: (option: T) => string;
     valueProperty: K;
 };
